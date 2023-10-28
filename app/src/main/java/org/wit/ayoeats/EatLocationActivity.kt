@@ -13,5 +13,6 @@ class EatLocationActivity : AppCompatActivity() {
 
         Timber.plant(Timber.DebugTree()) // initialise the logging library
         i("Eat Location Activity started")
+
     }
 }
