@@ -29,9 +29,9 @@ class MealLocationActivity : AppCompatActivity() {
 
         binding.btnAdd.setOnClickListener {
             // No need for var or val keyword since eatLocation was set to var above, note this for properties of classes
-            mealLocation.mealName =
-                binding.mealName.text.toString() // gets the text inside mealName and converts it to a string
-            if (mealLocation.mealName.isNotEmpty()) {
+            mealLocation.mealName = binding.mealName.text.toString() // gets the text inside mealName and converts it to a string
+            mealLocation.mealDescription = binding.mealDescription.text.toString()
+            if (mealLocation.mealName.isNotEmpty() && mealLocation.mealDescription.isNotEmpty()) {
                 mealLocations.add(mealLocation.copy())
                 i("add Button pressed : ${mealLocation.mealName}")
                 for (i in mealLocations.indices){
