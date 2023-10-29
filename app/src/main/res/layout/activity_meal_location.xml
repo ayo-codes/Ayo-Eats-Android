@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.wit.ayoeats.activities.EatLocationActivity">
+    tools:context="org.wit.ayoeats.activities.MealLocationActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -63,7 +63,7 @@
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
                     android:stateListAnimator="@null"
-                    android:text="@string/button_add_EatLocation"
+                    android:text="@string/button_add_MealLocation"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="16sp" />
             </LinearLayout>

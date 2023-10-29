@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">AyoEats</string>
-    <string name="button_add_EatLocation"> Add Eat Location</string>
+    <string name="button_add_MealLocation"> Add Meal Location</string>
     <string name="hint_mealName">Meal Name</string>
 </resources>
