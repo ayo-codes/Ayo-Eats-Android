@@ -15,6 +15,7 @@ class MainApp : Application() {
         super.onCreate()
         Timber.plant(Timber.DebugTree()) // initialise the logging library
         i("MainApp Activity started")
+        mealLocations.add(MealLocationModel("Test", "Test" , 24.99 , 4.0 ))
     }
 
 
