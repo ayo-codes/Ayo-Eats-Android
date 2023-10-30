@@ -10,11 +10,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.wit.ayoeats.R
 import org.wit.ayoeats.adapters.MealLocationAdapter
+import org.wit.ayoeats.adapters.MealLocationListener
 import org.wit.ayoeats.databinding.ActivityMealLocationListBinding
 import org.wit.ayoeats.main.MainApp
+import org.wit.ayoeats.models.MealLocationModel
 
 
-class MealLocationListActivity : AppCompatActivity() {
+class MealLocationListActivity : AppCompatActivity() , MealLocationListener {
 
 
     lateinit var app: MainApp
@@ -34,7 +36,7 @@ class MealLocationListActivity : AppCompatActivity() {
         // Recycler View Work
         val layoutManager = LinearLayoutManager(this) // create a LinearLayout and assign it to variable passing this class
         binding.recyclerView.layoutManager = layoutManager // set the recyclerView layoutManager to the one we created above
-        binding.recyclerView.adapter = MealLocationAdapter(app.mealLocations.findAll()) // set the recycler view adapter to our custom adapter
+        binding.recyclerView.adapter = MealLocationAdapter(app.mealLocations.findAll() , this) // set the recycler view adapter to our custom adapter
 
 
     }
@@ -60,6 +62,21 @@ class MealLocationListActivity : AppCompatActivity() {
             (binding.recyclerView.adapter)?.notifyItemRangeChanged(0, app.mealLocations.findAll().size)
         }
     }
+    // MealLocationListener since we implement the interface we need to use it's functions
+    override fun onMealLocationClick(mealLocation: MealLocationModel) {
+        val launcherIntent = Intent(this, MealLocationActivity::class.java)
+        getClickResult.launch(launcherIntent)
+    }
+
+    // instantiates the registerForActivityResult, and the .launch method is used in the onMealLocationClickClass
+    private val getClickResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+        if (it.resultCode == Activity.RESULT_OK){
+            (binding.recyclerView.adapter)?.notifyItemRangeChanged(0, app.mealLocations.findAll().size)
+        }
+    }
+
+
+
 }
 
 

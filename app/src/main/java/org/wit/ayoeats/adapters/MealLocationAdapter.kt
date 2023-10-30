@@ -6,7 +6,14 @@ import androidx.recyclerview.widget.RecyclerView
 import org.wit.ayoeats.databinding.CardMealLocationBinding
 import org.wit.ayoeats.models.MealLocationModel
 
-class MealLocationAdapter constructor( private var mealLocations: List<MealLocationModel> ): RecyclerView.Adapter<MealLocationAdapter.MainHolder>() {
+
+// interface for the listener to help with when the card is clicked,
+interface MealLocationListener {
+    fun onMealLocationClick(mealLocation: MealLocationModel)
+}
+
+// added a listener as a parameter of the adapter, which is utilised by the onBindViewHolder
+class MealLocationAdapter constructor( private var mealLocations: List<MealLocationModel> , private val listener: MealLocationListener): RecyclerView.Adapter<MealLocationAdapter.MainHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -20,7 +27,7 @@ class MealLocationAdapter constructor( private var mealLocations: List<MealLocat
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
         val mealLocation = mealLocations[holder.adapterPosition]
-        holder.bind(mealLocation)
+        holder.bind(mealLocation , listener)
     }
 
     override fun getItemCount(): Int {
@@ -29,9 +36,11 @@ class MealLocationAdapter constructor( private var mealLocations: List<MealLocat
 
     class MainHolder(private val binding: CardMealLocationBinding) : RecyclerView.ViewHolder(binding.root){
 
-        fun bind(mealLocation: MealLocationModel) {
+        // bind takes a listener as a parameter
+        fun bind(mealLocation: MealLocationModel, listener: MealLocationListener ) {
             binding.mealName.text = mealLocation.mealName
             binding.mealDescription.text = mealLocation.mealDescription
+            binding.root.setOnClickListener { listener.onMealLocationClick(mealLocation) }
         }
     }
 }
