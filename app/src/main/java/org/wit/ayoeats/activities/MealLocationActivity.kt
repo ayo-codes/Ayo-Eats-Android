@@ -6,28 +6,29 @@ import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import com.google.android.material.snackbar.Snackbar
 import org.wit.ayoeats.databinding.ActivityMealLocationBinding
+import org.wit.ayoeats.main.MainApp
 import org.wit.ayoeats.models.MealLocationModel
-import timber.log.Timber
 import timber.log.Timber.i
 
 
 class MealLocationActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMealLocationBinding // sets the variable binding to a type of ActivityEatLocationBinding
-
     var mealLocation = MealLocationModel() // instantiate the EatLocationModel Class here
-    val mealLocations =
-        ArrayList<MealLocationModel>() // Creates an array list of the individual eat locations
+    lateinit var app : MainApp // instantiate later MainApp class
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+//        Timber.plant(Timber.DebugTree()) // initialise the logging library
+       i("Meal Location Activity started")
 
         binding =
             ActivityMealLocationBinding.inflate(layoutInflater) // set the variable binding to what is returned from the layout inflater, which is the whole layout
         setContentView(binding.root) // sets the contentView to the root property of what is returned from the layoutInflater, which is usually the whole view
 
-        Timber.plant(Timber.DebugTree()) // initialise the logging library
-        i("Eat Location Activity started")
+        app = application as MainApp // This is where we initialise the lateinit from above
+
 
         // learnt from Kotlin Course on Udemy
         binding.seekBarRatings.setOnSeekBarChangeListener(object :OnSeekBarChangeListener{
@@ -60,10 +61,10 @@ class MealLocationActivity : AppCompatActivity() {
 
 
             if (mealLocation.mealName.isNotEmpty() && mealLocation.mealDescription.isNotEmpty()) {
-                mealLocations.add(mealLocation.copy())
+                app.mealLocations.add(mealLocation.copy())
                 i("add Button pressed : ${mealLocation.mealName}")
-                for (i in mealLocations.indices){
-                   i ("MealLocation[$i]: ${this.mealLocations[i]}")
+                for (i in app.mealLocations.indices){
+                   i ("MealLocation[$i]: ${this.app.mealLocations[i]}")
                 }
             } else {
                 Snackbar.make(it, "Please Enter a Meal Name", Snackbar.LENGTH_LONG)
