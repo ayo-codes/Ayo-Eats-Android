@@ -3,9 +3,11 @@ package org.wit.ayoeats.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import org.wit.ayoeats.R
 
 import org.wit.ayoeats.databinding.ActivityMealLocationListBinding
 import org.wit.ayoeats.databinding.CardMealLocationBinding
@@ -21,13 +23,29 @@ class MealLocationListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMealLocationListBinding.inflate(layoutInflater) // sets binding variable to the XML that is inflated
         setContentView(binding.root)
+
+        // menu binding
+        binding.toolbar.title = title
+        setSupportActionBar(binding.toolbar)
+
+
         app = application as MainApp // late initialising of MainApp class
 
+        // Recycler View Work
         val layoutManager = LinearLayoutManager(this) // create a LinearLayout and assign it to variable passing this class
         binding.recyclerView.layoutManager = layoutManager // set the recyclerView layoutManager to the one we created above
         binding.recyclerView.adapter = MealLocationAdapter(app.mealLocations) // set the recycler view adapter to our custom adapter
+
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 }
+
+
 
 class MealLocationAdapter constructor( private var mealLocations: List<MealLocationModel> ): RecyclerView.Adapter<MealLocationAdapter.MainHolder>() {
     override fun onCreateViewHolder(

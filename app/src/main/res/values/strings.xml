@@ -7,4 +7,5 @@
     <string name="hint_mealRating">Meal Rating</string>
     <string name="textview_rate_label">Current Rating</string>
     <string name="textview_rating_progress">0</string>
+    <string name="menu_addMealLocation">Add</string>
 </resources>
