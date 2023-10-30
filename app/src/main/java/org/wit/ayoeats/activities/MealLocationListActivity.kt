@@ -4,19 +4,20 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
+
 import android.view.Menu
 import android.view.MenuItem
-import android.view.ViewGroup
+
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+
 import org.wit.ayoeats.R
+import org.wit.ayoeats.adapters.MealLocationAdapter
 
 import org.wit.ayoeats.databinding.ActivityMealLocationListBinding
-import org.wit.ayoeats.databinding.CardMealLocationBinding
+
 import org.wit.ayoeats.main.MainApp
-import org.wit.ayoeats.models.MealLocationModel
+
 
 class MealLocationListActivity : AppCompatActivity() {
 
@@ -68,32 +69,3 @@ class MealLocationListActivity : AppCompatActivity() {
 
 
 
-class MealLocationAdapter constructor( private var mealLocations: List<MealLocationModel> ): RecyclerView.Adapter<MealLocationAdapter.MainHolder>() {
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): MainHolder {
-        val binding = CardMealLocationBinding.inflate(LayoutInflater.from(parent.context), parent , false)
-
-        return MainHolder(binding)
-
-
-    }
-
-    override fun onBindViewHolder(holder: MainHolder, position: Int) {
-        val mealLocation = mealLocations[holder.adapterPosition]
-        holder.bind(mealLocation)
-    }
-
-    override fun getItemCount(): Int {
-        return mealLocations.size
-    }
-
-    class MainHolder(private val binding: CardMealLocationBinding) : RecyclerView.ViewHolder(binding.root){
-
-        fun bind(mealLocation: MealLocationModel) {
-            binding.mealName.text = mealLocation.mealName
-            binding.mealDescription.text = mealLocation.mealDescription
-        }
-    }
-}
