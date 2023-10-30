@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.wit.ayoeats.activities.EatLocationActivity">
+    tools:context="org.wit.ayoeats.activities.MealLocationActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -54,6 +54,61 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="14sp" />
 
+                <EditText
+                    android:id="@+id/mealDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_margin="8dp"
+                    android:autofillHints="hint"
+                    android:hint="@string/hint_mealDescription"
+                    android:inputType="text"
+                    android:maxLength="250"
+                    android:maxLines="3"
+                    android:padding="8dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/mealPrice"
+                    android:layout_width="150dp"
+                    android:layout_height="48dp"
+                    android:layout_margin="8dp"
+                    android:autofillHints="hint"
+                    android:hint="@string/hint_mealPrice"
+                    android:inputType="numberDecimal"
+                    android:maxLength="6"
+                    android:maxLines="1"
+                    android:padding="8dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/mealRatingLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:padding="8dp"
+                    android:textSize="14sp"
+                    android:text="Meal Rating" />
+
+                <SeekBar
+                    android:id="@+id/seekBarRatings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:labelFor="@id/mealRatingLabel"
+                    android:min="0"
+                    android:max="5"
+                    android:padding="8dp"
+                    android:progress="0" />
+
+                <TextView
+                    android:id="@+id/RatingsProgress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:text="@string/textview_rating_progress" />
+
                 <Button
                     android:id="@+id/btnAdd"
                     android:layout_width="match_parent"
@@ -63,9 +118,13 @@
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
                     android:stateListAnimator="@null"
-                    android:text="@string/button_add_EatLocation"
+                    android:text="@string/button_add_MealLocation"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="16sp" />
+
+
+
+
             </LinearLayout>
         </ScrollView>
 

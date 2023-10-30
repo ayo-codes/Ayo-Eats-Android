@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">AyoEats</string>
-    <string name="button_add_EatLocation"> Add Eat Location</string>
+    <string name="button_add_MealLocation"> Add Meal Location</string>
     <string name="hint_mealName">Meal Name</string>
+    <string name="hint_mealDescription">Meal Description</string>
+    <string name="hint_mealPrice">Meal Price</string>
+    <string name="hint_mealRating">Meal Rating</string>
+    <string name="textview_rate_label">Current Rating</string>
+    <string name="textview_rating_progress">0</string>
+    <string name="menu_addMealLocation">Add</string>
 </resources>
