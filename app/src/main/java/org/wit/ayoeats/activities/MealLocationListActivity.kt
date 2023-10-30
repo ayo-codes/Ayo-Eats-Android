@@ -2,20 +2,15 @@ package org.wit.ayoeats.activities
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-
 import android.view.Menu
 import android.view.MenuItem
-
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-
 import org.wit.ayoeats.R
 import org.wit.ayoeats.adapters.MealLocationAdapter
-
 import org.wit.ayoeats.databinding.ActivityMealLocationListBinding
-
 import org.wit.ayoeats.main.MainApp
 
 
@@ -39,7 +34,7 @@ class MealLocationListActivity : AppCompatActivity() {
         // Recycler View Work
         val layoutManager = LinearLayoutManager(this) // create a LinearLayout and assign it to variable passing this class
         binding.recyclerView.layoutManager = layoutManager // set the recyclerView layoutManager to the one we created above
-        binding.recyclerView.adapter = MealLocationAdapter(app.mealLocations) // set the recycler view adapter to our custom adapter
+        binding.recyclerView.adapter = MealLocationAdapter(app.mealLocations.findAll()) // set the recycler view adapter to our custom adapter
 
 
     }
@@ -62,7 +57,7 @@ class MealLocationListActivity : AppCompatActivity() {
 
     private val getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
         if (it.resultCode == Activity.RESULT_OK){
-            (binding.recyclerView.adapter)?.notifyItemRangeChanged(0, app.mealLocations.size)
+            (binding.recyclerView.adapter)?.notifyItemRangeChanged(0, app.mealLocations.findAll().size)
         }
     }
 }

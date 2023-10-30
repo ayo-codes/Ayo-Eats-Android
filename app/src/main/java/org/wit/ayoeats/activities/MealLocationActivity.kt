@@ -1,11 +1,11 @@
 package org.wit.ayoeats.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import org.wit.ayoeats.R
 import org.wit.ayoeats.databinding.ActivityMealLocationBinding
@@ -69,10 +69,10 @@ class MealLocationActivity : AppCompatActivity() {
 
 
             if (mealLocation.mealName.isNotEmpty() && mealLocation.mealDescription.isNotEmpty()) {
-                app.mealLocations.add(mealLocation.copy())
+                app.mealLocations.create(mealLocation.copy())
                 i("add Button pressed : ${mealLocation.mealName}")
-                for (i in app.mealLocations.indices){
-                   i ("MealLocation[$i]: ${this.app.mealLocations[i]}")
+                for (i in app.mealLocations.findAll().indices){
+                   i ("MealLocation[$i]: ${this.app.mealLocations.findAll()[i]}")
                 }
                 setResult(RESULT_OK)
                 finish()
