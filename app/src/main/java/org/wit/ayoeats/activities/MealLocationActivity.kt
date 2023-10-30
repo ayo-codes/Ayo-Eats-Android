@@ -2,6 +2,8 @@ package org.wit.ayoeats.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.SeekBar
+import android.widget.SeekBar.OnSeekBarChangeListener
 import com.google.android.material.snackbar.Snackbar
 import org.wit.ayoeats.databinding.ActivityMealLocationBinding
 import org.wit.ayoeats.models.MealLocationModel
@@ -27,10 +29,36 @@ class MealLocationActivity : AppCompatActivity() {
         Timber.plant(Timber.DebugTree()) // initialise the logging library
         i("Eat Location Activity started")
 
+        // learnt from Kotlin Course on Udemy
+        binding.seekBarRatings.setOnSeekBarChangeListener(object :OnSeekBarChangeListener{
+            override fun onProgressChanged(
+                seekBar: SeekBar?,
+                progress: Int,
+                fromUser: Boolean
+            ) {
+                binding.RatingsProgress.text = binding.seekBarRatings.progress.toString()
+
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                binding.RatingsProgress.text = binding.seekBarRatings.progress.toString()
+
+            }
+
+        })
+
         binding.btnAdd.setOnClickListener {
             // No need for var or val keyword since eatLocation was set to var above, note this for properties of classes
             mealLocation.mealName = binding.mealName.text.toString() // gets the text inside mealName and converts it to a string
             mealLocation.mealDescription = binding.mealDescription.text.toString()
+            mealLocation.mealPrice = binding.mealPrice.text.toString().toDouble()
+            mealLocation.mealRating = binding.RatingsProgress.text.toString().toDouble()
+
+
             if (mealLocation.mealName.isNotEmpty() && mealLocation.mealDescription.isNotEmpty()) {
                 mealLocations.add(mealLocation.copy())
                 i("add Button pressed : ${mealLocation.mealName}")
