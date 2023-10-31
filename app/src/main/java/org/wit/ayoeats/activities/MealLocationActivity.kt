@@ -10,6 +10,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
+import com.squareup.picasso.Picasso
 import org.wit.ayoeats.R
 import org.wit.ayoeats.databinding.ActivityMealLocationBinding
 import org.wit.ayoeats.helpers.showImagePicker
@@ -149,9 +150,14 @@ class MealLocationActivity : AppCompatActivity() {
                     RESULT_OK -> {
                         if(result.data != null){
                             i("Got Result ${result.data!!.data}")
+                            mealLocation.image = result.data!!.data!! // sets the image uri to the uri from the data.data object
+                            Picasso.get() // Picasso Library
+                                .load(mealLocation.image) // Loads the uri we got back from results.data.data
+                                .into(binding.mealLocationImage) // binds it to the UI
                         }
                     }
-                    RESULT_CANCELED -> { } else -> { }
+                    RESULT_CANCELED -> { }
+                    else -> { }
                 }
 
             }
