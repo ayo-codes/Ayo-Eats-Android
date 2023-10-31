@@ -9,4 +9,5 @@
     <string name="textview_rating_progress">0</string>
     <string name="menu_addMealLocation">Add</string>
     <string name="menu_cancelMealLocation">Cancel</string>
+    <string name="enter_mealLocation_mealName">Please Enter a Meal Name</string>
 </resources>

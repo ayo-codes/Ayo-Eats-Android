@@ -87,7 +87,7 @@ class MealLocationActivity : AppCompatActivity() {
                 setResult(RESULT_OK)
                 finish()
             } else {
-                Snackbar.make(it, "Please Enter a Meal Name", Snackbar.LENGTH_LONG)
+                Snackbar.make(it, R.string.enter_mealLocation_mealName, Snackbar.LENGTH_LONG)
                     .show() // This shows the warning if the field is empty
             }
 
