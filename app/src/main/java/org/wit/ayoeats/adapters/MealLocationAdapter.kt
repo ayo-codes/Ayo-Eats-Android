@@ -3,6 +3,7 @@ package org.wit.ayoeats.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import org.wit.ayoeats.databinding.CardMealLocationBinding
 import org.wit.ayoeats.models.MealLocationModel
 
@@ -40,6 +41,7 @@ class MealLocationAdapter constructor( private var mealLocations: List<MealLocat
         fun bind(mealLocation: MealLocationModel, listener: MealLocationListener ) {
             binding.mealName.text = mealLocation.mealName
             binding.mealDescription.text = mealLocation.mealDescription
+            Picasso.get().load(mealLocation.image).resize(200,200).into(binding.imageIcon) // this gets the image , resizes it and binds it to the imageicon UI
             binding.root.setOnClickListener { listener.onMealLocationClick(mealLocation) }
         }
     }
