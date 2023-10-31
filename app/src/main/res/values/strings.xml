@@ -15,4 +15,5 @@
     <string name="select_mealLocation_image">Select Meal  Image</string>
     <string name="change_mealLocation_image"> Change Meal Image</string>
     <string name="button_location_map">Pick Location on Map</string>
+    <string name="title_activity_map">MapActivity</string>
 </resources>

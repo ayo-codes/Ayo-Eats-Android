@@ -128,7 +128,7 @@
                     app:srcCompat="@mipmap/ic_launcher"/>
 
                 <Button
-                    android:id="@+id/btnmealLocationMap"
+                    android:id="@+id/btnMealLocationMap"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"

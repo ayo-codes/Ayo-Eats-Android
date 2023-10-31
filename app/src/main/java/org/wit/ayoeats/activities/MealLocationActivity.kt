@@ -25,7 +25,8 @@ class MealLocationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMealLocationBinding // sets the variable binding to a type of ActivityEatLocationBinding
     var mealLocation = MealLocationModel() // instantiate the EatLocationModel Class here
     lateinit var app: MainApp // instantiate later MainApp class
-    private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
+    private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent> // image intent launcher
+    private lateinit var mapIntentLauncher: ActivityResultLauncher<Intent> // Map intent launcher
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -128,13 +129,19 @@ class MealLocationActivity : AppCompatActivity() {
             i("Select Image Clicked")
         }
 
+        // call the image callback
         registerImagePickerCallback()
 
 
         // Event Handler for the Pick Location Button
-        binding.btnmealLocationMap.setOnClickListener {
+        binding.btnMealLocationMap.setOnClickListener {
+            val launcherIntent = Intent(this , MapActivity::class.java) // sets the intent, with toActivity set to the MapActivity
+            mapIntentLauncher.launch(launcherIntent) // calls the launch function on the mapIntentLauncher to actually open the activity
             i("Pick Location on Map Clicked")
         }
+
+        //call the map callback
+        registerMapCallback()
 
 
 
@@ -176,6 +183,13 @@ class MealLocationActivity : AppCompatActivity() {
                 }
 
             }
+    }
+
+    // Map CallBack Function
+
+    private  fun registerMapCallback() {
+        mapIntentLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+        {i ("Map Loaded")}
     }
 
 }
