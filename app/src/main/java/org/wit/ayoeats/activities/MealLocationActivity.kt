@@ -53,6 +53,9 @@ class MealLocationActivity : AppCompatActivity() {
             binding.seekBarRatings.progress = mealLocation.mealRating.toInt()
             binding.RatingsProgress.text = mealLocation.mealRating.toString()
             binding.btnAdd.setText(R.string.save_meal_location) // change the button text
+            Picasso.get()
+                .load(mealLocation.image)
+                .into(binding.mealLocationImage)
 
         }
 
