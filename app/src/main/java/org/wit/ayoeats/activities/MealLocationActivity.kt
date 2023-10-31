@@ -1,10 +1,13 @@
 package org.wit.ayoeats.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
+import org.wit.ayoeats.R
 import org.wit.ayoeats.databinding.ActivityMealLocationBinding
 import org.wit.ayoeats.main.MainApp
 import org.wit.ayoeats.models.MealLocationModel
@@ -27,7 +30,21 @@ class MealLocationActivity : AppCompatActivity() {
             ActivityMealLocationBinding.inflate(layoutInflater) // set the variable binding to what is returned from the layout inflater, which is the whole layout
         setContentView(binding.root) // sets the contentView to the root property of what is returned from the layoutInflater, which is usually the whole view
 
+        //menu toolbar binding
+        binding.toolbarAdd.title = title // sets title to title of the app
+        setSupportActionBar(binding.toolbarAdd)
+
         app = application as MainApp // This is where we initialise the lateinit from above
+
+        if(intent.hasExtra("mealLocation_edit")){
+            mealLocation = intent.extras?.getParcelable("mealLocation_edit")!!
+            binding.mealName.setText(mealLocation.mealName)
+            binding.mealDescription.setText(mealLocation.mealDescription)
+            binding.mealPrice.setText(mealLocation.mealPrice.toString())
+            binding.seekBarRatings.progress = mealLocation.mealRating.toInt()
+            binding.RatingsProgress.text = mealLocation.mealRating.toString()
+
+        }
 
 
         // learnt from Kotlin Course on Udemy
@@ -52,6 +69,7 @@ class MealLocationActivity : AppCompatActivity() {
 
         })
 
+
         binding.btnAdd.setOnClickListener {
             // No need for var or val keyword since eatLocation was set to var above, note this for properties of classes
             mealLocation.mealName = binding.mealName.text.toString() // gets the text inside mealName and converts it to a string
@@ -61,10 +79,10 @@ class MealLocationActivity : AppCompatActivity() {
 
 
             if (mealLocation.mealName.isNotEmpty() && mealLocation.mealDescription.isNotEmpty()) {
-                app.mealLocations.add(mealLocation.copy())
+                app.mealLocations.create(mealLocation.copy())
                 i("add Button pressed : ${mealLocation.mealName}")
-                for (i in app.mealLocations.indices){
-                   i ("MealLocation[$i]: ${this.app.mealLocations[i]}")
+                for (i in app.mealLocations.findAll().indices){
+                   i ("MealLocation[$i]: ${this.app.mealLocations.findAll()[i]}")
                 }
                 setResult(RESULT_OK)
                 finish()
@@ -76,5 +94,20 @@ class MealLocationActivity : AppCompatActivity() {
             i("this is the mealLocation.title ${mealLocation.mealName}")
             i("this is the mealLocation on its own  ${mealLocation.toString()}")
         }
+    }
+
+    // Creates the menu
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_meal_location , menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.item_cancel -> {
+                finish()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
