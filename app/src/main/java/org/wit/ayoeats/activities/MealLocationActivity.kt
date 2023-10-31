@@ -125,12 +125,17 @@ class MealLocationActivity : AppCompatActivity() {
         // Event Handler for the Add Image Button
         binding.chooseImage.setOnClickListener {
             showImagePicker(imageIntentLauncher)
-//            i("Select Image Clicked")
+            i("Select Image Clicked")
         }
 
         registerImagePickerCallback()
 
-        //Image CallBack
+
+        // Event Handler for the Pick Location Button
+        binding.btnmealLocationMap.setOnClickListener {
+            i("Pick Location on Map Clicked")
+        }
+
 
 
     }
@@ -150,6 +155,7 @@ class MealLocationActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    //Image CallBack function
      private fun registerImagePickerCallback() {
         imageIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
