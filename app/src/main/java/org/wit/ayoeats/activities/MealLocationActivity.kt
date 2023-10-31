@@ -16,6 +16,7 @@ import org.wit.ayoeats.R
 import org.wit.ayoeats.databinding.ActivityMealLocationBinding
 import org.wit.ayoeats.helpers.showImagePicker
 import org.wit.ayoeats.main.MainApp
+import org.wit.ayoeats.models.Location
 import org.wit.ayoeats.models.MealLocationModel
 import timber.log.Timber.i
 
@@ -135,8 +136,10 @@ class MealLocationActivity : AppCompatActivity() {
 
         // Event Handler for the Pick Location Button
         binding.btnMealLocationMap.setOnClickListener {
+            val location = Location(6.4281 ,3.4219, 15f )
             val launcherIntent = Intent(this , MapActivity::class.java) // sets the intent, with toActivity set to the MapActivity
-            mapIntentLauncher.launch(launcherIntent) // calls the launch function on the mapIntentLauncher to actually open the activity
+                .putExtra("location", location) // this passes the location object as data
+            mapIntentLauncher.launch(launcherIntent)   // calls the launch function on the mapIntentLauncher to actually open the activity
             i("Pick Location on Map Clicked")
         }
 
