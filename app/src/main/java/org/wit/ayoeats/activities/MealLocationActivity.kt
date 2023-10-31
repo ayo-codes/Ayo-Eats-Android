@@ -28,6 +28,7 @@ class MealLocationActivity : AppCompatActivity() {
     lateinit var app: MainApp // instantiate later MainApp class
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent> // image intent launcher
     private lateinit var mapIntentLauncher: ActivityResultLauncher<Intent> // Map intent launcher
+    var location = Location(6.4281 ,3.4219, 15f )
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -136,7 +137,6 @@ class MealLocationActivity : AppCompatActivity() {
 
         // Event Handler for the Pick Location Button
         binding.btnMealLocationMap.setOnClickListener {
-            val location = Location(6.4281 ,3.4219, 15f )
             val launcherIntent = Intent(this , MapActivity::class.java) // sets the intent, with toActivity set to the MapActivity
                 .putExtra("location", location) // this passes the location object as data
             mapIntentLauncher.launch(launcherIntent)   // calls the launch function on the mapIntentLauncher to actually open the activity
@@ -192,7 +192,21 @@ class MealLocationActivity : AppCompatActivity() {
 
     private  fun registerMapCallback() {
         mapIntentLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-        {i ("Map Loaded")}
+        { result ->
+            when (result.resultCode){
+                RESULT_OK -> {
+                    if(result.data != null) {
+                        i("Got Location ${result.data.toString()}")
+                        location = result.data!!.extras?.getParcelable("location")!!
+                        i("Location = $location")
+                    }
+                }
+                RESULT_CANCELED -> { }
+                else -> { }
+            }
+
+            i ("Map Loaded")
+        }
     }
 
 }
