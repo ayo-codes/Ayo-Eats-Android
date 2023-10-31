@@ -74,6 +74,7 @@ class MealLocationActivity : AppCompatActivity() {
         })
 
 
+        // Event Handler for the Add Meal Location Button
         binding.btnAdd.setOnClickListener {
             // No need for var or val keyword since eatLocation was set to var above, note this for properties of classes
             mealLocation.mealName =
@@ -104,6 +105,12 @@ class MealLocationActivity : AppCompatActivity() {
 
             i("this is the mealLocation.title ${mealLocation.mealName}")
             i("this is the mealLocation on its own  ${mealLocation.toString()}")
+        }
+
+
+        // Event Handler for the Add Image Button
+        binding.chooseImage.setOnClickListener {
+            i("Select Image Clicked")
         }
     }
 

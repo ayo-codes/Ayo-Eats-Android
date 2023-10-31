@@ -11,4 +11,5 @@
     <string name="menu_cancelMealLocation">Cancel</string>
     <string name="enter_mealLocation_mealName">Please Enter a Meal Name</string>
     <string name="save_meal_location">Save Meal Location</string>
+    <string name="button_addImage">Add Meal Image </string>
 </resources>
