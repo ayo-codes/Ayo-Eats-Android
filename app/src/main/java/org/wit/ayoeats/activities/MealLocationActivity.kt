@@ -1,6 +1,7 @@
 package org.wit.ayoeats.activities
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -56,6 +57,10 @@ class MealLocationActivity : AppCompatActivity() {
             Picasso.get()
                 .load(mealLocation.image)
                 .into(binding.mealLocationImage)
+            //check if the image uri is not empty then change the button label
+            if(mealLocation.image != Uri.EMPTY) {
+                binding.chooseImage.setText(R.string.change_mealLocation_image)
+            }
 
         }
 
@@ -157,6 +162,7 @@ class MealLocationActivity : AppCompatActivity() {
                             Picasso.get() // Picasso Library
                                 .load(mealLocation.image) // Loads the uri we got back from results.data.data
                                 .into(binding.mealLocationImage) // binds it to the UI
+                            binding.chooseImage.setText(R.string.change_mealLocation_image) // Change the button label once an image has been selected
                         }
                     }
                     RESULT_CANCELED -> { }
