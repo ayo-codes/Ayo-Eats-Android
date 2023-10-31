@@ -18,13 +18,14 @@ class MealLocationActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMealLocationBinding // sets the variable binding to a type of ActivityEatLocationBinding
     var mealLocation = MealLocationModel() // instantiate the EatLocationModel Class here
-    lateinit var app : MainApp // instantiate later MainApp class
+    lateinit var app: MainApp // instantiate later MainApp class
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        Timber.plant(Timber.DebugTree()) // initialise the logging library
-       i("Meal Location Activity started")
+        i("Meal Location Activity started")
+        var edit = false // this acts as a flag to let us know if we are or aren't in edit mode
 
         binding =
             ActivityMealLocationBinding.inflate(layoutInflater) // set the variable binding to what is returned from the layout inflater, which is the whole layout
@@ -36,7 +37,9 @@ class MealLocationActivity : AppCompatActivity() {
 
         app = application as MainApp // This is where we initialise the lateinit from above
 
-        if(intent.hasExtra("mealLocation_edit")){
+        if (intent.hasExtra("mealLocation_edit")) {
+            edit =
+                true // set the edit variable to true , to ensure we have a way of flagging we are in edit mode
             mealLocation = intent.extras?.getParcelable("mealLocation_edit")!!
             binding.mealName.setText(mealLocation.mealName)
             binding.mealDescription.setText(mealLocation.mealDescription)
@@ -49,7 +52,7 @@ class MealLocationActivity : AppCompatActivity() {
 
 
         // learnt from Kotlin Course on Udemy
-        binding.seekBarRatings.setOnSeekBarChangeListener(object :OnSeekBarChangeListener{
+        binding.seekBarRatings.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
             override fun onProgressChanged(
                 seekBar: SeekBar?,
                 progress: Int,
@@ -73,24 +76,31 @@ class MealLocationActivity : AppCompatActivity() {
 
         binding.btnAdd.setOnClickListener {
             // No need for var or val keyword since eatLocation was set to var above, note this for properties of classes
-            mealLocation.mealName = binding.mealName.text.toString() // gets the text inside mealName and converts it to a string
+            mealLocation.mealName =
+                binding.mealName.text.toString() // gets the text inside mealName and converts it to a string
             mealLocation.mealDescription = binding.mealDescription.text.toString()
             mealLocation.mealPrice = binding.mealPrice.text.toString().toDouble()
             mealLocation.mealRating = binding.RatingsProgress.text.toString().toDouble()
 
-
-            if (mealLocation.mealName.isNotEmpty() && mealLocation.mealDescription.isNotEmpty()) {
-                app.mealLocations.create(mealLocation.copy())
-                i("add Button pressed : ${mealLocation.mealName}")
-                for (i in app.mealLocations.findAll().indices){
-                   i ("MealLocation[$i]: ${this.app.mealLocations.findAll()[i]}")
-                }
-                setResult(RESULT_OK)
-                finish()
-            } else {
+            //input validation and checking if in edit mode
+            if (mealLocation.mealName.isEmpty() && mealLocation.mealDescription.isEmpty()) {
                 Snackbar.make(it, R.string.enter_mealLocation_mealName, Snackbar.LENGTH_LONG)
                     .show() // This shows the warning if the field is empty
+            } else {
+                if (edit) { // Checks here if we are in edit mode
+                    app.mealLocations.update(mealLocation.copy())
+                } else {
+                    app.mealLocations.create(mealLocation.copy())
+                    i("add Button pressed : ${mealLocation.mealName}")
+                    for (i in app.mealLocations.findAll().indices) {
+                        i("MealLocation[$i]: ${this.app.mealLocations.findAll()[i]}")
+                    }
+                }
+
             }
+            setResult(RESULT_OK)
+            finish()
+
 
             i("this is the mealLocation.title ${mealLocation.mealName}")
             i("this is the mealLocation on its own  ${mealLocation.toString()}")
@@ -99,7 +109,7 @@ class MealLocationActivity : AppCompatActivity() {
 
     // Creates the menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_meal_location , menu)
+        menuInflater.inflate(R.menu.menu_meal_location, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
