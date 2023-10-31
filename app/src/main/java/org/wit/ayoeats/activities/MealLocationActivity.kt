@@ -36,6 +36,16 @@ class MealLocationActivity : AppCompatActivity() {
 
         app = application as MainApp // This is where we initialise the lateinit from above
 
+        if(intent.hasExtra("mealLocation_edit")){
+            mealLocation = intent.extras?.getParcelable("mealLocation_edit")!!
+            binding.mealName.setText(mealLocation.mealName)
+            binding.mealDescription.setText(mealLocation.mealDescription)
+            binding.mealPrice.setText(mealLocation.mealPrice.toString())
+            binding.seekBarRatings.progress = mealLocation.mealRating.toInt()
+            binding.RatingsProgress.text = mealLocation.mealRating.toString()
+
+        }
+
 
         // learnt from Kotlin Course on Udemy
         binding.seekBarRatings.setOnSeekBarChangeListener(object :OnSeekBarChangeListener{

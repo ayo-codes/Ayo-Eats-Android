@@ -62,9 +62,12 @@ class MealLocationListActivity : AppCompatActivity() , MealLocationListener {
             (binding.recyclerView.adapter)?.notifyItemRangeChanged(0, app.mealLocations.findAll().size)
         }
     }
+
+
     // MealLocationListener since we implement the interface we need to use it's functions
     override fun onMealLocationClick(mealLocation: MealLocationModel) {
         val launcherIntent = Intent(this, MealLocationActivity::class.java)
+        launcherIntent.putExtra("mealLocation_edit" , mealLocation) // using parcelable to create a key("mealLocation_edit") and passes a value of (mealLocation object)
         getClickResult.launch(launcherIntent)
     }
 
