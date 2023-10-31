@@ -43,6 +43,7 @@ class MealLocationActivity : AppCompatActivity() {
             binding.mealPrice.setText(mealLocation.mealPrice.toString())
             binding.seekBarRatings.progress = mealLocation.mealRating.toInt()
             binding.RatingsProgress.text = mealLocation.mealRating.toString()
+            binding.btnAdd.setText(R.string.save_meal_location) // change the button text
 
         }
 
