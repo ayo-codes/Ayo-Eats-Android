@@ -1,14 +1,18 @@
 package org.wit.ayoeats.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import org.wit.ayoeats.R
 import org.wit.ayoeats.databinding.ActivityMealLocationBinding
+import org.wit.ayoeats.helpers.showImagePicker
 import org.wit.ayoeats.main.MainApp
 import org.wit.ayoeats.models.MealLocationModel
 import timber.log.Timber.i
@@ -19,6 +23,7 @@ class MealLocationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMealLocationBinding // sets the variable binding to a type of ActivityEatLocationBinding
     var mealLocation = MealLocationModel() // instantiate the EatLocationModel Class here
     lateinit var app: MainApp // instantiate later MainApp class
+    private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -110,8 +115,15 @@ class MealLocationActivity : AppCompatActivity() {
 
         // Event Handler for the Add Image Button
         binding.chooseImage.setOnClickListener {
-            i("Select Image Clicked")
+            showImagePicker(imageIntentLauncher)
+//            i("Select Image Clicked")
         }
+
+        registerImagePickerCallback()
+
+        //Image CallBack
+
+
     }
 
     // Creates the menu
@@ -128,4 +140,21 @@ class MealLocationActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
+     private fun registerImagePickerCallback() {
+        imageIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { result ->
+                when(result.resultCode){
+                    RESULT_OK -> {
+                        if(result.data != null){
+                            i("Got Result ${result.data!!.data}")
+                        }
+                    }
+                    RESULT_CANCELED -> { } else -> { }
+                }
+
+            }
+    }
+
 }
