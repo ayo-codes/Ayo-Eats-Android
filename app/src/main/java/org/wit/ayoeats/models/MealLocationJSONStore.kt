@@ -52,6 +52,19 @@ class MealLocationJSONStore(private val context: Context) : MealLocationStore { 
     }
 
     override fun update(mealLocation: MealLocationModel) {
+        val mealLocationsList = findAll() as ArrayList<MealLocationModel>
+        var foundMeaLocation: MealLocationModel ? = mealLocationsList.find { m -> m.id == mealLocation.id }
+        if (foundMeaLocation !=null) {
+            foundMeaLocation.mealName = mealLocation.mealName
+            foundMeaLocation.mealDescription = mealLocation.mealDescription
+            foundMeaLocation.mealRating = mealLocation.mealRating
+            foundMeaLocation.mealPrice = mealLocation.mealPrice
+            foundMeaLocation.image = mealLocation.image
+            foundMeaLocation.lat = mealLocation.lat
+            foundMeaLocation.lng = mealLocation.lng
+            foundMeaLocation.zoom = mealLocation.zoom
+        }
+        serialize()
 
     }
 
