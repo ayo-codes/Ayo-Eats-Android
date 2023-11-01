@@ -1,7 +1,7 @@
 package org.wit.ayoeats.main
 
 import android.app.Application
-import org.wit.ayoeats.models.MealLocationMemStore
+import org.wit.ayoeats.models.MealLocationJSONStore
 import org.wit.ayoeats.models.MealLocationModel
 import org.wit.ayoeats.models.MealLocationStore
 import timber.log.Timber
@@ -22,7 +22,8 @@ class MainApp : Application() {
         super.onCreate()
         Timber.plant(Timber.DebugTree()) // initialise the logging library
         i("MainApp Activity started")
-        mealLocations = MealLocationMemStore() // instantiates the MealLocationMemStore Class and saves it in the variable mealLocations
+        //mealLocations = MealLocationMemStore() // instantiates the MealLocationMemStore Class and saves it in the variable mealLocations
+        mealLocations = MealLocationJSONStore(applicationContext) // instantiates the JSONStore passing the application context as the context
         mealLocations.create(MealLocationModel(0L, "Test", "Test" , 24.99 , 4.0 ))
     }
 

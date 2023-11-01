@@ -2,7 +2,6 @@ package org.wit.ayoeats.models
 
 import android.content.Context
 import android.net.Uri
-
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonDeserializationContext
@@ -12,10 +11,12 @@ import com.google.gson.JsonPrimitive
 import com.google.gson.JsonSerializationContext
 import com.google.gson.JsonSerializer
 import com.google.gson.reflect.TypeToken
-import org.wit.ayoeats.helpers.*
+import org.wit.ayoeats.helpers.exists
+import org.wit.ayoeats.helpers.read
+import org.wit.ayoeats.helpers.write
 import timber.log.Timber
 import java.lang.reflect.Type
-import java.util.*
+import java.util.Random
 
 
 
@@ -68,21 +69,21 @@ class MealLocationJSONStore(private val context: Context) : MealLocationStore { 
         mealLocations.forEach { Timber.i("$it") }
     }
 
-    class UriParser : JsonDeserializer<Uri>, JsonSerializer<Uri> {
-        override fun deserialize(
-            json: JsonElement?,
-            typeOfT: Type?,
-            context: JsonDeserializationContext?
-        ): Uri {
-            return Uri.parse(json?.asString)
-        }
+}
+class UriParser : JsonDeserializer<Uri>, JsonSerializer<Uri> {
+    override fun deserialize(
+        json: JsonElement?,
+        typeOfT: Type?,
+        context: JsonDeserializationContext?
+    ): Uri {
+        return Uri.parse(json?.asString)
+    }
 
-        override fun serialize(
-            src: Uri?,
-            typeOfSrc: Type?,
-            context: JsonSerializationContext?
-        ): JsonElement {
-            return JsonPrimitive(src.toString())
-        }
+    override fun serialize(
+        src: Uri?,
+        typeOfSrc: Type?,
+        context: JsonSerializationContext?
+    ): JsonElement {
+        return JsonPrimitive(src.toString())
     }
 }

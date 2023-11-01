@@ -127,7 +127,7 @@ class MealLocationActivity : AppCompatActivity() {
 
         // Event Handler for the Add Image Button
         binding.chooseImage.setOnClickListener {
-            showImagePicker(imageIntentLauncher)
+            showImagePicker(imageIntentLauncher , this) // we now pass a context when using the showImagePicker
             i("Select Image Clicked")
         }
 
@@ -181,7 +181,11 @@ class MealLocationActivity : AppCompatActivity() {
                     RESULT_OK -> {
                         if(result.data != null){
                             i("Got Result ${result.data!!.data}")
-                            mealLocation.image = result.data!!.data!! // sets the image uri to the uri from the data.data object
+                            // added in to allow for permissions to access files
+                            val image = result.data!!.data!! // sets the image uri to the uri from the data.data object
+                            contentResolver.takePersistableUriPermission(image, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                            mealLocation.image = image
+
                             Picasso.get() // Picasso Library
                                 .load(mealLocation.image) // Loads the uri we got back from results.data.data
                                 .into(binding.mealLocationImage) // binds it to the UI
