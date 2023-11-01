@@ -40,6 +40,10 @@ class MealLocationMemStore : MealLocationStore {
         }
     }
 
+    override fun delete(mealLocation: MealLocationModel) {
+        mealLocations.remove(mealLocation)
+    }
+
     fun logAll() {
         mealLocations.forEach { i ("$it") }
     }

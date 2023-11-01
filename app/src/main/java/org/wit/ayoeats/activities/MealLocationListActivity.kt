@@ -21,6 +21,8 @@ class MealLocationListActivity : AppCompatActivity() , MealLocationListener {
 
     lateinit var app: MainApp
     private lateinit var binding : ActivityMealLocationListBinding // binding variable to connect code to the UI
+
+    private var position : Int =0 // for the position of the adapter element
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMealLocationListBinding.inflate(layoutInflater) // sets binding variable to the XML that is inflated
@@ -65,9 +67,10 @@ class MealLocationListActivity : AppCompatActivity() , MealLocationListener {
 
 
     // MealLocationListener since we implement the interface we need to use it's functions
-    override fun onMealLocationClick(mealLocation: MealLocationModel) {
+    override fun onMealLocationClick(mealLocation: MealLocationModel , pos:Int) {
         val launcherIntent = Intent(this, MealLocationActivity::class.java)
         launcherIntent.putExtra("mealLocation_edit" , mealLocation) // using parcelable to create a key("mealLocation_edit") and passes a value of (mealLocation object)
+        position = pos
         getClickResult.launch(launcherIntent)
     }
 
@@ -75,6 +78,8 @@ class MealLocationListActivity : AppCompatActivity() , MealLocationListener {
     private val getClickResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
         if (it.resultCode == Activity.RESULT_OK){
             (binding.recyclerView.adapter)?.notifyItemRangeChanged(0, app.mealLocations.findAll().size)
+        } else if (it.resultCode == 99) {
+            (binding.recyclerView.adapter)?.notifyItemRemoved(position)
         }
     }
 

@@ -68,6 +68,11 @@ class MealLocationJSONStore(private val context: Context) : MealLocationStore { 
 
     }
 
+    override fun delete(mealLocation: MealLocationModel) {
+        mealLocations.remove(mealLocation)
+        serialize()
+    }
+
     private fun serialize(){
         val jsonString = gsonBuilder.toJson(mealLocations , listType)
         write(context, JSON_FILE , jsonString)
