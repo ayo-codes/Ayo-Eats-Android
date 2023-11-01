@@ -33,6 +33,9 @@ class MealLocationMemStore : MealLocationStore {
             foundMealLocation.mealPrice = mealLocation.mealPrice
             foundMealLocation.mealRating = mealLocation.mealRating
             foundMealLocation.image = mealLocation.image // updates the image
+            foundMealLocation.lat = mealLocation.lat
+            foundMealLocation.lng = mealLocation.lng
+            foundMealLocation.zoom = mealLocation.zoom
             logAll()
         }
     }

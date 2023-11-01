@@ -28,7 +28,7 @@ class MealLocationActivity : AppCompatActivity() {
     lateinit var app: MainApp // instantiate later MainApp class
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent> // image intent launcher
     private lateinit var mapIntentLauncher: ActivityResultLauncher<Intent> // Map intent launcher
-    var location = Location(6.4281 ,3.4219, 15f )
+    // var location = Location(6.4281 ,3.4219, 15f )
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -137,6 +137,13 @@ class MealLocationActivity : AppCompatActivity() {
 
         // Event Handler for the Pick Location Button
         binding.btnMealLocationMap.setOnClickListener {
+            // initialise the location class here in the clickListener
+            var location = Location(6.4281 ,3.4219, 15f )
+            if(mealLocation.zoom != 0f) {
+                location.lat = mealLocation.lat
+                location.lng = mealLocation.lng
+                location.zoom = mealLocation.zoom
+            }
             val launcherIntent = Intent(this , MapActivity::class.java) // sets the intent, with toActivity set to the MapActivity
                 .putExtra("location", location) // this passes the location object as data
             mapIntentLauncher.launch(launcherIntent)   // calls the launch function on the mapIntentLauncher to actually open the activity
@@ -197,8 +204,11 @@ class MealLocationActivity : AppCompatActivity() {
                 RESULT_OK -> {
                     if(result.data != null) {
                         i("Got Location ${result.data.toString()}")
-                        location = result.data!!.extras?.getParcelable("location")!!
+                        val location = result.data!!.extras?.getParcelable<Location>("location")!!
                         i("Location = $location")
+                        mealLocation.lat = location.lat
+                        mealLocation.lng = location.lng
+                        mealLocation.zoom = location.zoom
                     }
                 }
                 RESULT_CANCELED -> { }
