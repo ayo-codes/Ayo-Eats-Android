@@ -15,8 +15,9 @@ import org.wit.ayoeats.R
 import org.wit.ayoeats.databinding.ActivityMapBinding
 import org.wit.ayoeats.models.Location
 
-class MapActivity : AppCompatActivity(), OnMapReadyCallback , GoogleMap.OnMarkerDragListener {
+class MapActivity : AppCompatActivity(), OnMapReadyCallback , GoogleMap.OnMarkerDragListener , GoogleMap.OnMarkerClickListener {
 // GoogleMap.OnMarkerDragListener used to track the movement of the marker
+// GoogleMap.OnMarkerClickListener is used to track the clicks on the marker
     private lateinit var map: GoogleMap
     private lateinit var binding: ActivityMapBinding
     private var location = Location()
@@ -58,8 +59,9 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback , GoogleMap.OnMarker
             .draggable(true)
             .position(loc)
         map.addMarker(options)
-        // sets a drag listener to this map , you can pass this, since the class is implementing it
-        map.setOnMarkerDragListener(this)
+
+        map.setOnMarkerDragListener(this) // sets a marker drag listener to this map , you can pass this, since the class is implementing it
+        map.setOnMarkerClickListener(this)// sets a marker click listener to the map, hence why you can pass this, since the class is implementing it
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, location.zoom))
     }
 
@@ -68,7 +70,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback , GoogleMap.OnMarker
 
     }
 
-    // This function is used to store the details of where the marker last was
+    // This function used to store the details of where the marker last was
     override fun onMarkerDragEnd(p0: Marker) {
         location.lat = p0.position.latitude
         location.lng = p0.position.longitude
@@ -86,4 +88,14 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback , GoogleMap.OnMarker
         finish()
         super.onBackPressed()
     }
+
+
+// function override to listen for click changes on the marker element
+    override fun onMarkerClick(p0: Marker): Boolean {
+        val loc = LatLng(location.lat, location.lng)
+        p0.snippet = "GPS : $loc"
+        return false
+    }
+
+
 }
