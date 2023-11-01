@@ -1,5 +1,7 @@
 package org.wit.ayoeats.activities
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -7,13 +9,14 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import org.wit.ayoeats.R
 import org.wit.ayoeats.databinding.ActivityMapBinding
 import org.wit.ayoeats.models.Location
 
-class MapActivity : AppCompatActivity(), OnMapReadyCallback {
-
+class MapActivity : AppCompatActivity(), OnMapReadyCallback , GoogleMap.OnMarkerDragListener {
+// GoogleMap.OnMarkerDragListener used to track the movement of the marker
     private lateinit var map: GoogleMap
     private lateinit var binding: ActivityMapBinding
     private var location = Location()
@@ -45,6 +48,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
 
+
+
         // Add a marker in Lagos and move the camera
         val loc = LatLng(location.lat , location.lng)
         val options = MarkerOptions() // instantiate a class of MarkerOptions
@@ -53,6 +58,32 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
             .draggable(true)
             .position(loc)
         map.addMarker(options)
+        // sets a drag listener to this map , you can pass this, since the class is implementing it
+        map.setOnMarkerDragListener(this)
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, location.zoom))
+    }
+
+    // 3 functions are from the onMapDragListener
+    override fun onMarkerDrag(p0: Marker) {
+
+    }
+
+    // This function is used to store the details of where the marker last was
+    override fun onMarkerDragEnd(p0: Marker) {
+        location.lat = p0.position.latitude
+        location.lng = p0.position.longitude
+        location.zoom = map.cameraPosition.zoom
+    }
+
+    override fun onMarkerDragStart(p0: Marker) {
+
+    }
+
+    override fun onBackPressed() {
+        val resultIntent = Intent()
+        resultIntent.putExtra("location" , location)
+        setResult(Activity.RESULT_OK, resultIntent)
+        finish()
+        super.onBackPressed()
     }
 }
