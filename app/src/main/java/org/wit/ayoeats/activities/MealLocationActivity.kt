@@ -1,6 +1,7 @@
 package org.wit.ayoeats.activities
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -15,6 +16,7 @@ import org.wit.ayoeats.R
 import org.wit.ayoeats.databinding.ActivityMealLocationBinding
 import org.wit.ayoeats.helpers.showImagePicker
 import org.wit.ayoeats.main.MainApp
+import org.wit.ayoeats.models.Location
 import org.wit.ayoeats.models.MealLocationModel
 import timber.log.Timber.i
 
@@ -24,7 +26,9 @@ class MealLocationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMealLocationBinding // sets the variable binding to a type of ActivityEatLocationBinding
     var mealLocation = MealLocationModel() // instantiate the EatLocationModel Class here
     lateinit var app: MainApp // instantiate later MainApp class
-    private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
+    private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent> // image intent launcher
+    private lateinit var mapIntentLauncher: ActivityResultLauncher<Intent> // Map intent launcher
+    var location = Location(6.4281 ,3.4219, 15f )
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,6 +60,10 @@ class MealLocationActivity : AppCompatActivity() {
             Picasso.get()
                 .load(mealLocation.image)
                 .into(binding.mealLocationImage)
+            //check if the image uri is not empty then change the button label
+            if(mealLocation.image != Uri.EMPTY) {
+                binding.chooseImage.setText(R.string.change_mealLocation_image)
+            }
 
         }
 
@@ -120,12 +128,24 @@ class MealLocationActivity : AppCompatActivity() {
         // Event Handler for the Add Image Button
         binding.chooseImage.setOnClickListener {
             showImagePicker(imageIntentLauncher)
-//            i("Select Image Clicked")
+            i("Select Image Clicked")
         }
 
+        // call the image callback
         registerImagePickerCallback()
 
-        //Image CallBack
+
+        // Event Handler for the Pick Location Button
+        binding.btnMealLocationMap.setOnClickListener {
+            val launcherIntent = Intent(this , MapActivity::class.java) // sets the intent, with toActivity set to the MapActivity
+                .putExtra("location", location) // this passes the location object as data
+            mapIntentLauncher.launch(launcherIntent)   // calls the launch function on the mapIntentLauncher to actually open the activity
+            i("Pick Location on Map Clicked")
+        }
+
+        //call the map callback
+        registerMapCallback()
+
 
 
     }
@@ -145,6 +165,7 @@ class MealLocationActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    //Image CallBack function
      private fun registerImagePickerCallback() {
         imageIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
@@ -157,6 +178,7 @@ class MealLocationActivity : AppCompatActivity() {
                             Picasso.get() // Picasso Library
                                 .load(mealLocation.image) // Loads the uri we got back from results.data.data
                                 .into(binding.mealLocationImage) // binds it to the UI
+                            binding.chooseImage.setText(R.string.change_mealLocation_image) // Change the button label once an image has been selected
                         }
                     }
                     RESULT_CANCELED -> { }
@@ -164,6 +186,27 @@ class MealLocationActivity : AppCompatActivity() {
                 }
 
             }
+    }
+
+    // Map CallBack Function
+
+    private  fun registerMapCallback() {
+        mapIntentLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+        { result ->
+            when (result.resultCode){
+                RESULT_OK -> {
+                    if(result.data != null) {
+                        i("Got Location ${result.data.toString()}")
+                        location = result.data!!.extras?.getParcelable("location")!!
+                        i("Location = $location")
+                    }
+                }
+                RESULT_CANCELED -> { }
+                else -> { }
+            }
+
+            i ("Map Loaded")
+        }
     }
 
 }
