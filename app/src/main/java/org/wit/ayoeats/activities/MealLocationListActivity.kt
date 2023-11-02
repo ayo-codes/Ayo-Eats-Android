@@ -55,15 +55,26 @@ class MealLocationListActivity : AppCompatActivity() , MealLocationListener {
                 val launcherIntent = Intent(this, MealLocationActivity::class.java)
                 getResult.launch(launcherIntent)
             }
+            R.id.item_map -> {
+                val launcherIntent = Intent(this , MealLocationMapsActivity::class.java)
+                mapIntentLauncher.launch(launcherIntent)
+            }
         }
         return super.onOptionsItemSelected(item)
     }
 
+    // instantiates the registerForActivityResult, and the .launch method is used in the onOptionsItemSelected for item.map
     private val getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
         if (it.resultCode == Activity.RESULT_OK){
             (binding.recyclerView.adapter)?.notifyItemRangeChanged(0, app.mealLocations.findAll().size)
         }
     }
+
+    // instantiates the registerForActivityResult, and the .launch method is used in the onOptionsItemSelected for item.map
+    private val mapIntentLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+    { }
+
+
 
 
     // MealLocationListener since we implement the interface we need to use it's functions
@@ -82,6 +93,8 @@ class MealLocationListActivity : AppCompatActivity() , MealLocationListener {
             (binding.recyclerView.adapter)?.notifyItemRemoved(position)
         }
     }
+
+
 
 
 
