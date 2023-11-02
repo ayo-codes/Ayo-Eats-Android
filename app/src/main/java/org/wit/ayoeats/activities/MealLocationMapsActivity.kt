@@ -5,13 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import org.wit.ayoeats.databinding.ActivityMealLocationMapsBinding
 import org.wit.ayoeats.databinding.ContentMealLocationMapsBinding
 import org.wit.ayoeats.main.MainApp
 
-class MealLocationMapsActivity : AppCompatActivity() {
-
+class MealLocationMapsActivity : AppCompatActivity() , GoogleMap.OnMarkerClickListener  { //implement onMarkerClickListener on the activity
     private lateinit var binding: ActivityMealLocationMapsBinding // binds to the outer layout
     private lateinit var contentBinding: ContentMealLocationMapsBinding // binds to the content meal location layout
     lateinit var map: GoogleMap
@@ -36,6 +36,7 @@ class MealLocationMapsActivity : AppCompatActivity() {
 
     }
 
+    // functions related to displaying google maps
     override fun onDestroy() {
         super.onDestroy()
         contentBinding.mapView.onDestroy()
@@ -62,6 +63,7 @@ class MealLocationMapsActivity : AppCompatActivity() {
         contentBinding.mapView.onSaveInstanceState(outState)
     }
 
+    // configuration of map's display and last location
     private fun configureMap(){
         map.uiSettings.isZoomControlsEnabled = true
         app.mealLocations.findAll().forEach{
@@ -69,8 +71,16 @@ class MealLocationMapsActivity : AppCompatActivity() {
             val options = MarkerOptions().title(it.mealName).position(loc)
             map.addMarker(options)?.tag = it.id
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.zoom))
+            map.setOnMarkerClickListener(this) // sets a markerclicklistener to the map
         }
 
+    }
+
+    // marker listener for details on the map
+    override fun onMarkerClick(p0: Marker): Boolean {
+        contentBinding.currentMealName.text = p0.title
+
+        return false
     }
 }
 
