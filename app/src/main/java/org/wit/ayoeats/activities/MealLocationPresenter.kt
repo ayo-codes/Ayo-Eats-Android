@@ -77,8 +77,8 @@ class MealLocationPresenter(private val view: MealLocationView) {
         }
         val launcherIntent = Intent(
             view,
-            MapActivity::class.java
-        ) // sets the intent, with toActivity set to the MapActivity
+            EditLocationView::class.java
+        ) // sets the intent, with toActivity set to the EditLocationView
             .putExtra("location", location) // this passes the location object as data
         mapIntentLauncher.launch(launcherIntent)   // calls the launch function on the mapIntentLauncher to actually open the activity
         Timber.i("Pick Location on Map Clicked")
