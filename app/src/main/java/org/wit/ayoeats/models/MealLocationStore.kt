@@ -8,4 +8,6 @@ interface MealLocationStore {
     fun update(mealLocation: MealLocationModel) // to update the mealLocation
 
     fun delete(mealLocation: MealLocationModel) // to delete a mealLocation
+
+    fun findById(id:Long) : MealLocationModel?
 }

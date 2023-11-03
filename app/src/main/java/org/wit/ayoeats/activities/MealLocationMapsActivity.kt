@@ -7,6 +7,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.squareup.picasso.Picasso
 import org.wit.ayoeats.databinding.ActivityMealLocationMapsBinding
 import org.wit.ayoeats.databinding.ContentMealLocationMapsBinding
 import org.wit.ayoeats.main.MainApp
@@ -77,8 +78,12 @@ class MealLocationMapsActivity : AppCompatActivity() , GoogleMap.OnMarkerClickLi
     }
 
     // marker listener for details on the map
-    override fun onMarkerClick(p0: Marker): Boolean {
-        contentBinding.currentMealName.text = p0.title
+    override fun onMarkerClick(marker: Marker): Boolean {
+        val tag = marker.tag as Long
+        val mealLocation = app.mealLocations.findById(tag)
+        contentBinding.currentMealName.text = mealLocation!!.mealName
+        contentBinding.currentMealDescription.text = mealLocation.mealDescription
+        Picasso.get().load(mealLocation.image).into(contentBinding.currentImage)
 
         return false
     }

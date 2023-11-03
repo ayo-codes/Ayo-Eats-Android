@@ -73,6 +73,11 @@ class MealLocationJSONStore(private val context: Context) : MealLocationStore { 
         serialize()
     }
 
+    override fun findById(id: Long): MealLocationModel? {
+        val foundMealLocation: MealLocationModel? = mealLocations.find { it.id == id }
+        return foundMealLocation
+    }
+
     private fun serialize(){
         val jsonString = gsonBuilder.toJson(mealLocations , listType)
         write(context, JSON_FILE , jsonString)
