@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import org.wit.ayoeats.activities.MealLocationMapsActivity
+import org.wit.ayoeats.views.meallocationmaps.MealLocationMapsView
 import org.wit.ayoeats.main.MainApp
 import org.wit.ayoeats.models.MealLocationModel
 import org.wit.ayoeats.views.meallocation.MealLocationView
@@ -33,7 +33,7 @@ class MealLocationListPresenter (val view: MealLocationListView) {
 
     // function for when the show map menu button pressed
     fun doShowMealLocationsMap() {
-        val launcherIntent = Intent(view , MealLocationMapsActivity::class.java)
+        val launcherIntent = Intent(view , MealLocationMapsView::class.java)
         mapIntentLauncher.launch(launcherIntent)
     }
 
