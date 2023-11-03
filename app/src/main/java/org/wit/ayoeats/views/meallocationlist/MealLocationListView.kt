@@ -1,4 +1,4 @@
-package org.wit.ayoeats.activities
+package org.wit.ayoeats.views.meallocationlist
 
 import android.os.Bundle
 import android.view.Menu
@@ -61,7 +61,7 @@ class MealLocationListView : AppCompatActivity() , MealLocationListener {
 
 
     // MealLocationListener since we implement the interface we need to use it's functions
-    override fun onMealLocationClick(mealLocation: MealLocationModel , pos:Int) {
+    override fun onMealLocationClick(mealLocation: MealLocationModel , position:Int) {
        this.position = position
         presenter.doEditMealLocation(mealLocation, this.position)
     }

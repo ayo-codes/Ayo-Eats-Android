@@ -1,4 +1,4 @@
-package org.wit.ayoeats.activities
+package org.wit.ayoeats.views.meallocation
 
 import android.net.Uri
 import android.os.Bundle

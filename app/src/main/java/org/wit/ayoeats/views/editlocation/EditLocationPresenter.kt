@@ -1,4 +1,4 @@
-package org.wit.ayoeats.activities
+package org.wit.ayoeats.views.editlocation
 
 import android.app.Activity
 import android.content.Intent

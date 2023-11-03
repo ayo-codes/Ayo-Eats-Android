@@ -1,4 +1,4 @@
-package org.wit.ayoeats.activities
+package org.wit.ayoeats.views.meallocation
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
@@ -10,6 +10,7 @@ import org.wit.ayoeats.helpers.showImagePicker
 import org.wit.ayoeats.main.MainApp
 import org.wit.ayoeats.models.Location
 import org.wit.ayoeats.models.MealLocationModel
+import org.wit.ayoeats.views.editlocation.EditLocationView
 import timber.log.Timber
 
 class MealLocationPresenter(private val view: MealLocationView) {

@@ -1,11 +1,13 @@
-package org.wit.ayoeats.activities
+package org.wit.ayoeats.views.meallocationlist
 
 import android.app.Activity
 import android.content.Intent
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import org.wit.ayoeats.activities.MealLocationMapsActivity
 import org.wit.ayoeats.main.MainApp
 import org.wit.ayoeats.models.MealLocationModel
+import org.wit.ayoeats.views.meallocation.MealLocationView
 
 class MealLocationListPresenter (val view: MealLocationListView) {
 

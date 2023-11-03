@@ -27,11 +27,11 @@
             android:value="${MAPS_API_KEY}" />
 
         <activity
-            android:name=".activities.EditLocationView"
+            android:name=".views.editlocation.EditLocationView"
             android:exported="false"
             android:label="@string/title_activity_map" />
         <activity
-            android:name=".activities.MealLocationListView"
+            android:name=".views.meallocationlist.MealLocationListView"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,7 +40,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.MealLocationView"
+            android:name=".views.meallocation.MealLocationView"
             android:exported="true"></activity>
     </application>
 

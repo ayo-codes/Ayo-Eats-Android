@@ -1,4 +1,4 @@
-package org.wit.ayoeats.activities
+package org.wit.ayoeats.views.editlocation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
