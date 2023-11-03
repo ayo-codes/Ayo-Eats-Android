@@ -7,19 +7,22 @@
     android:layout_height="match_parent"
     tools:context="org.wit.ayoeats.activities.MealLocationActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/colorAccent"
             android:fitsSystemWindows="true"
             app:elevation="0dip"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
             <androidx.appcompat.widget.Toolbar
@@ -29,138 +32,211 @@
                 app:titleTextColor="@color/colorPrimary" />
         </com.google.android.material.appbar.AppBarLayout>
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/appBarLayout"
-            android:fillViewport="true">
 
-            <LinearLayout
+
+<!--        <ScrollView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_below="@id/appBarLayout"-->
+<!--            android:fillViewport="true">-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="vertical">-->
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="650dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <EditText
-                    android:id="@+id/mealName"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_margin="8dp"
-                    android:autofillHints="hint"
-                    android:hint="@string/hint_mealName"
-                    android:inputType="text"
-                    android:maxLength="25"
-                    android:maxLines="1"
-                    android:padding="8dp"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="14sp" />
 
-                <EditText
-                    android:id="@+id/mealDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_margin="8dp"
-                    android:autofillHints="hint"
-                    android:hint="@string/hint_mealDescription"
-                    android:inputType="text"
-                    android:maxLength="250"
-                    android:maxLines="3"
-                    android:padding="8dp"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="14sp" />
+                    <EditText
+                        android:id="@+id/mealName"
+                        android:layout_width="365dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="64dp"
+                        android:layout_marginEnd="8dp"
+                        android:ems="10"
+                        android:autofillHints="hint"
+                        android:hint="@string/hint_mealName"
+                        android:inputType="text"
+                        android:maxLength="25"
+                        android:maxLines="1"
+                        android:padding="8dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.503"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:textSize="14sp" />
 
-                <EditText
-                    android:id="@+id/mealPrice"
-                    android:layout_width="150dp"
-                    android:layout_height="48dp"
-                    android:layout_margin="8dp"
-                    android:autofillHints="hint"
-                    android:hint="@string/hint_mealPrice"
-                    android:inputType="numberDecimal"
-                    android:maxLength="6"
-                    android:maxLines="1"
-                    android:padding="8dp"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="14sp" />
+                    <EditText
+                        android:id="@+id/mealDescription"
+                        android:layout_width="365dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:ems="10"
+                        android:autofillHints="hint"
+                        android:hint="@string/hint_mealDescription"
+                        android:inputType="text"
+                        android:maxLength="250"
+                        android:maxLines="3"
+                        android:padding="8dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/mealName"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/mealPrice"
+                        android:layout_width="150dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:ems="10"
+                        android:autofillHints="hint"
+                        android:hint="@string/hint_mealPrice"
+                        android:inputType="numberDecimal"
+                        android:maxLength="6"
+                        android:maxLines="1"
+                        android:padding="8dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/mealDescription"
+                        android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/mealRatingLabel"
-                    android:layout_width="match_parent"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
                     android:padding="8dp"
+                    android:text="@string/hint_mealRating"
                     android:textSize="14sp"
-                    android:text="Meal Rating" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/mealPrice" />
 
-                <SeekBar
-                    android:id="@+id/seekBarRatings"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:labelFor="@id/mealRatingLabel"
-                    android:min="0"
-                    android:max="5"
-                    android:padding="8dp"
-                    android:progress="0" />
+                    <SeekBar
+                        android:id="@+id/seekBarRatings"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/mealRatingLabel"
+                        android:labelFor="@id/mealRatingLabel"
+                        android:min="0"
+                        android:max="5"
+                        android:padding="8dp"
+                        android:progress="0" />
 
                 <TextView
                     android:id="@+id/RatingsProgress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/textview_rating_progress"
+                    android:textAlignment="center"
                     android:textSize="14sp"
-                    android:text="@string/textview_rating_progress" />
+                    app:layout_constraintEnd_toEndOf="parent"
 
-                <Button
-                    android:id="@+id/chooseImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:background="@color/colorAccent"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp"
-                    android:text="@string/button_addImage"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="16sp"/>
-
-                <ImageView
-                    android:id="@+id/mealLocationImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@mipmap/ic_launcher"/>
-
-                <Button
-                    android:id="@+id/btnMealLocationMap"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:background="@color/colorAccent"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp"
-                    android:stateListAnimator="@null"
-                    android:text="@string/button_location_map"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="16sp"/>
-                
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/seekBarRatings" />
 
                 <Button
                     android:id="@+id/btnAdd"
-                    android:layout_width="match_parent"
+                    android:layout_width="365dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
                     android:background="@color/colorAccent"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
                     android:stateListAnimator="@null"
                     android:text="@string/button_add_MealLocation"
                     android:textColor="@color/colorPrimaryDark"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/RatingsProgress"
                     android:textSize="16sp" />
 
+                    <Button
+                        android:id="@+id/chooseImage"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@color/colorAccent"
+                        android:paddingBottom="8dp"
+                        android:paddingTop="8dp"
+                        android:text="@string/button_addImage"
+                        android:textColor="@color/colorPrimaryDark"
+                        app:layout_constraintStart_toStartOf="@id/btnAdd"
+                        app:layout_constraintTop_toBottomOf="@id/btnAdd"
+                        android:textSize="16sp"/>
 
 
 
-            </LinearLayout>
-        </ScrollView>
+                    <Button
+                        android:id="@+id/btnMealLocationMap"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@color/colorAccent"
+                        android:paddingBottom="8dp"
+                        android:paddingTop="8dp"
+                        android:stateListAnimator="@null"
+                        android:text="@string/button_location_map"
+                        android:textColor="@color/colorPrimaryDark"
+                        app:layout_constraintEnd_toEndOf="@id/btnAdd"
+                        app:layout_constraintStart_toEndOf="@id/chooseImage"
+                        app:layout_constraintTop_toBottomOf="@id/btnAdd"
+                        android:textSize="16sp"/>
 
-    </RelativeLayout>
+                <ImageView
+                    android:id="@+id/mealLocationImage"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.555"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btnMealLocationMap"
+                    app:layout_constraintVertical_bias="0.173"
+                    android:contentDescription="@string/button_addImage"
+                    app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--            </LinearLayout>-->
+<!--        </ScrollView>-->
+
+<!--    </RelativeLayout>-->
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
