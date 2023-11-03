@@ -6,4 +6,8 @@ interface MealLocationStore {
     fun create(mealLocation: MealLocationModel) //should create a new mealLocation of type MealLocationModel Class using it's arguments
 
     fun update(mealLocation: MealLocationModel) // to update the mealLocation
+
+    fun delete(mealLocation: MealLocationModel) // to delete a mealLocation
+
+    fun findById(id:Long) : MealLocationModel?
 }

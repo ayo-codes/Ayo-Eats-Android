@@ -10,7 +10,7 @@ import org.wit.ayoeats.models.MealLocationModel
 
 // interface for the listener to help with when the card is clicked,
 interface MealLocationListener {
-    fun onMealLocationClick(mealLocation: MealLocationModel)
+    fun onMealLocationClick(mealLocation: MealLocationModel, position: Int)
 }
 
 // added a listener as a parameter of the adapter, which is utilised by the onBindViewHolder
@@ -42,7 +42,7 @@ class MealLocationAdapter constructor( private var mealLocations: List<MealLocat
             binding.mealName.text = mealLocation.mealName
             binding.mealDescription.text = mealLocation.mealDescription
             Picasso.get().load(mealLocation.image).resize(200,200).into(binding.imageIcon) // this gets the image , resizes it and binds it to the imageicon UI
-            binding.root.setOnClickListener { listener.onMealLocationClick(mealLocation) }
+            binding.root.setOnClickListener { listener.onMealLocationClick(mealLocation, adapterPosition) }
         }
     }
 }

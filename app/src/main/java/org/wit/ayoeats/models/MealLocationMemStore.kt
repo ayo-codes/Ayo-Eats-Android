@@ -40,6 +40,15 @@ class MealLocationMemStore : MealLocationStore {
         }
     }
 
+    override fun delete(mealLocation: MealLocationModel) {
+        mealLocations.remove(mealLocation)
+    }
+
+    override fun findById(id: Long): MealLocationModel? {
+        val foundMealLocation: MealLocationModel? = mealLocations.find { it.id == id }
+        return foundMealLocation
+    }
+
     fun logAll() {
         mealLocations.forEach { i ("$it") }
     }

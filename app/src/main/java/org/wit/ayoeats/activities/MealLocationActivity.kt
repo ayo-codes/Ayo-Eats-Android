@@ -21,7 +21,7 @@ import org.wit.ayoeats.models.MealLocationModel
 import timber.log.Timber.i
 
 
-class MealLocationActivity : AppCompatActivity() {
+class MealLocationActivity : AppCompatActivity()  {
 
     private lateinit var binding: ActivityMealLocationBinding // sets the variable binding to a type of ActivityEatLocationBinding
     var mealLocation = MealLocationModel() // instantiate the EatLocationModel Class here
@@ -29,13 +29,13 @@ class MealLocationActivity : AppCompatActivity() {
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent> // image intent launcher
     private lateinit var mapIntentLauncher: ActivityResultLauncher<Intent> // Map intent launcher
     // var location = Location(6.4281 ,3.4219, 15f )
-
+    var edit = false // this acts as a flag to let us know if we are or aren't in edit mode
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        Timber.plant(Timber.DebugTree()) // initialise the logging library
         i("Meal Location Activity started")
-        var edit = false // this acts as a flag to let us know if we are or aren't in edit mode
+
 
         binding =
             ActivityMealLocationBinding.inflate(layoutInflater) // set the variable binding to what is returned from the layout inflater, which is the whole layout
@@ -160,11 +160,19 @@ class MealLocationActivity : AppCompatActivity() {
     // Creates the menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_meal_location, menu)
+        if (edit) {
+            menu?.getItem(0)?.isVisible = true
+        }
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.item_delete -> {
+                setResult(99) // sets the result to 99 and this is the code the adapter looks for
+                app.mealLocations.delete(mealLocation)
+                finish()
+            }
             R.id.item_cancel -> {
                 finish()
             }
