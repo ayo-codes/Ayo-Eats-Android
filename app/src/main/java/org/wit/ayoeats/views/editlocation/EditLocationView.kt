@@ -1,32 +1,28 @@
-package org.wit.ayoeats.activities
+package org.wit.ayoeats.views.editlocation
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
 import org.wit.ayoeats.R
-import org.wit.ayoeats.databinding.ActivityMapBinding
 import org.wit.ayoeats.models.Location
 
-class MapActivity : AppCompatActivity(), OnMapReadyCallback , GoogleMap.OnMarkerDragListener , GoogleMap.OnMarkerClickListener {
+class EditLocationView : AppCompatActivity(), OnMapReadyCallback , GoogleMap.OnMarkerDragListener , GoogleMap.OnMarkerClickListener {
 // GoogleMap.OnMarkerDragListener used to track the movement of the marker
 // GoogleMap.OnMarkerClickListener is used to track the clicks on the marker
     private lateinit var map: GoogleMap
-    private lateinit var binding: ActivityMapBinding
-    private var location = Location()
+    lateinit var presenter: EditLocationPresenter
+//    private lateinit var binding: ActivityMapBinding
+    var location = Location()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMapBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+//        binding = ActivityMapBinding.inflate(layoutInflater)
+        setContentView(R.layout.activity_map)
+        presenter = EditLocationPresenter(this) // instantiates the presenter passing this view as the view
 
         // Set the location object here to the object properties received from the MealLocationActivity
         location = intent.extras?.getParcelable<Location>("location")!!
@@ -48,21 +44,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback , GoogleMap.OnMarker
      */
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
-
-
-
-        // Add a marker in Lagos and move the camera
-        val loc = LatLng(location.lat , location.lng)
-        val options = MarkerOptions() // instantiate a class of MarkerOptions
-            .title("Meal Location")
-            .snippet("GPS : $loc")
-            .draggable(true)
-            .position(loc)
-        map.addMarker(options)
-
-        map.setOnMarkerDragListener(this) // sets a marker drag listener to this map , you can pass this, since the class is implementing it
-        map.setOnMarkerClickListener(this)// sets a marker click listener to the map, hence why you can pass this, since the class is implementing it
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, location.zoom))
+        presenter.initMap(map)
     }
 
     // 3 functions are from the onMapDragListener
@@ -72,9 +54,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback , GoogleMap.OnMarker
 
     // This function used to store the details of where the marker last was
     override fun onMarkerDragEnd(p0: Marker) {
-        location.lat = p0.position.latitude
-        location.lng = p0.position.longitude
-        location.zoom = map.cameraPosition.zoom
+        presenter.doUpdateLocation(p0.position.latitude, p0.position.longitude, map.cameraPosition.zoom)
     }
 
     override fun onMarkerDragStart(p0: Marker) {
@@ -82,18 +62,14 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback , GoogleMap.OnMarker
     }
 
     override fun onBackPressed() {
-        val resultIntent = Intent()
-        resultIntent.putExtra("location" , location)
-        setResult(Activity.RESULT_OK, resultIntent)
-        finish()
         super.onBackPressed()
+        presenter.doOnBackPressed()
     }
 
 
 // function override to listen for click changes on the marker element
-    override fun onMarkerClick(p0: Marker): Boolean {
-        val loc = LatLng(location.lat, location.lng)
-        p0.snippet = "GPS : $loc"
+    override fun onMarkerClick(marker: Marker): Boolean {
+        presenter.doUpdateMarker(marker)
         return false
     }
 
