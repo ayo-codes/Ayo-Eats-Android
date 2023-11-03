@@ -52,7 +52,7 @@ class MealLocationListActivity : AppCompatActivity() , MealLocationListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.item_add -> {
-                val launcherIntent = Intent(this, MealLocationActivity::class.java)
+                val launcherIntent = Intent(this, MealLocationView::class.java)
                 getResult.launch(launcherIntent)
             }
             R.id.item_map -> {
@@ -79,7 +79,7 @@ class MealLocationListActivity : AppCompatActivity() , MealLocationListener {
 
     // MealLocationListener since we implement the interface we need to use it's functions
     override fun onMealLocationClick(mealLocation: MealLocationModel , pos:Int) {
-        val launcherIntent = Intent(this, MealLocationActivity::class.java)
+        val launcherIntent = Intent(this, MealLocationView::class.java)
         launcherIntent.putExtra("mealLocation_edit" , mealLocation) // using parcelable to create a key("mealLocation_edit") and passes a value of (mealLocation object)
         position = pos
         getClickResult.launch(launcherIntent)

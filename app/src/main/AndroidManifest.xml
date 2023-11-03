@@ -40,7 +40,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.MealLocationActivity"
+            android:name=".activities.MealLocationView"
             android:exported="true"></activity>
     </application>
 
