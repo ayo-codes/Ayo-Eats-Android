@@ -1,9 +1,12 @@
 package org.wit.ayoeats.main
 
 import android.app.Application
-import org.wit.ayoeats.models.MealLocationJSONStore
+import org.wit.ayoeats.models.MealLocationMemStore
 import org.wit.ayoeats.models.MealLocationModel
 import org.wit.ayoeats.models.MealLocationStore
+import org.wit.ayoeats.models.User
+import org.wit.ayoeats.models.UserMemStore
+import org.wit.ayoeats.models.UserStore
 import timber.log.Timber
 import timber.log.Timber.i
 
@@ -17,14 +20,20 @@ class MainApp : Application() {
     // refactor how the mealLocations stores objects
     lateinit var mealLocations : MealLocationStore
 
+    lateinit var users : UserStore
 
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree()) // initialise the logging library
         i("MainApp Activity started")
-        //mealLocations = MealLocationMemStore() // instantiates the MealLocationMemStore Class and saves it in the variable mealLocations
-        mealLocations = MealLocationJSONStore(applicationContext) // instantiates the JSONStore passing the application context as the context
+        mealLocations = MealLocationMemStore() // instantiates the MealLocationMemStore Class and saves it in the variable mealLocations
+        //mealLocations = MealLocationJSONStore(applicationContext) // instantiates the JSONStore passing the application context as the context
         mealLocations.create(MealLocationModel(0L, "Test", "Test" , 24.99 , 4.0 ))
+
+        users = UserMemStore()
+
+        users.create(User("john", "doe","trial@trial.com" , "testing" ))
+        users.create(User("mary","jane","trial2@trial.com" , "testedtrial" ))
     }
 
 

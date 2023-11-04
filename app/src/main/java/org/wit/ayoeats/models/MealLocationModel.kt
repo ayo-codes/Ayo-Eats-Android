@@ -20,3 +20,6 @@ data class MealLocationModel(
 
 @Parcelize
 data class Location(var lat: Double = 0.0, var lng: Double = 0.0, var zoom: Float = 0f) : Parcelable
+
+@Parcelize
+data class User(var firstname: String = "", var surname:String="" , var email: String ="", var password: String =""):Parcelable
