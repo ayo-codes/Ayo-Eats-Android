@@ -1,6 +1,9 @@
 package org.wit.ayoeats.ui.login
 
+import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 
 import org.wit.ayoeats.databinding.ActivitySignUpBinding
@@ -12,6 +15,9 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignUpBinding
     lateinit var app: MainApp
     var user = User()
+    private lateinit var toLoginIntentLauncher : ActivityResultLauncher<Intent>
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
@@ -28,5 +34,18 @@ class SignUpActivity : AppCompatActivity() {
             i("Button signup clicked")
             i("added $user to ${app.users}")
         }
+
+        binding.textViewLoginLink.setOnClickListener {
+            val launcherIntent = Intent(this, LoginActivity::class.java)
+            toLoginIntentLauncher.launch(launcherIntent)
+        }
+        registerToLoginCallback()
     }
+
+    private fun registerToLoginCallback() {
+        toLoginIntentLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+        { }
+        i("Moving to the Login Page")
+    }
+
 }
