@@ -33,8 +33,8 @@ class MainApp : Application() {
 
         users = UserMemStore()
 
-        users.create(User("john", "doe","trial@trial.com" , "testing" ))
-        users.create(User("mary","jane","trial2@trial.com" , "testedtrial" ))
+        users.create(User(0L,"john", "doe","trial@trial.com" , "testing" ))
+        users.create(User(1L,"mary","jane","trial2@trial.com" , "testedtrial" ))
 
     }
 

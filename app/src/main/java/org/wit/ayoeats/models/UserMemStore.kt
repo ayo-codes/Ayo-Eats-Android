@@ -5,8 +5,15 @@ import timber.log.Timber.i
 
 val users = ArrayList<User>()
 
+var lastUserId = 0L
+
+internal fun getUserId(): Long {
+    return lastUserId++
+}
+
 class UserMemStore : UserStore {
     override fun create(user: User) {
+        user.id = getId()
         users.add(user)
         logAll()
 
