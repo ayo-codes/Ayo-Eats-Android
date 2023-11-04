@@ -128,6 +128,7 @@ class MealLocationView : AppCompatActivity() {
             R.id.item_cancel -> {
                 presenter.doCancel()
             }
+
         }
         return super.onOptionsItemSelected(item)
     }

@@ -39,7 +39,8 @@ class LoginActivity : AppCompatActivity() {
                 }else {
                     app.users.loginUser(user)
                     i("Button Clicked")
-                    i("added $user to ${app.users}")
+                    i("logged in $user ")
+                    app.userLoggedIn = true
                     val launcherIntent = Intent(this, MealLocationListView::class.java)
                     toMealLocationListIntentLauncher.launch(launcherIntent)
                 }

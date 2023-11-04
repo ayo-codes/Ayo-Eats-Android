@@ -21,6 +21,7 @@ class MainApp : Application() {
     lateinit var mealLocations : MealLocationStore
 
     lateinit var users : UserStore
+     var userLoggedIn : Boolean = false
 
     override fun onCreate() {
         super.onCreate()
@@ -34,6 +35,7 @@ class MainApp : Application() {
 
         users.create(User("john", "doe","trial@trial.com" , "testing" ))
         users.create(User("mary","jane","trial2@trial.com" , "testedtrial" ))
+
     }
 
 

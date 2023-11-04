@@ -4,22 +4,25 @@ import android.app.Activity
 import android.content.Intent
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import org.wit.ayoeats.views.meallocationmaps.MealLocationMapsView
 import org.wit.ayoeats.main.MainApp
 import org.wit.ayoeats.models.MealLocationModel
+import org.wit.ayoeats.ui.login.LoginActivity
 import org.wit.ayoeats.views.meallocation.MealLocationView
+import org.wit.ayoeats.views.meallocationmaps.MealLocationMapsView
 
 class MealLocationListPresenter (val view: MealLocationListView) {
 
     var app: MainApp
     private lateinit var refreshIntentLauncher : ActivityResultLauncher<Intent>
     private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
+    private lateinit var logoutIntentLauncher : ActivityResultLauncher<Intent> // Logout intent launcher
     private var position: Int = 0
 
     init {
         app = view.application as MainApp
         registerRefreshCallback()
         registerMapCallback()
+        registerLogoutCallback()
     }
 
     // retrieve all meal locations
@@ -46,6 +49,13 @@ class MealLocationListPresenter (val view: MealLocationListView) {
 
     }
 
+    fun doLogout(){
+        app.userLoggedIn = false
+        val launcherIntent = Intent(view, LoginActivity::class.java)
+        logoutIntentLauncher.launch(launcherIntent)
+        view.finish()
+    }
+
     // instantiates the registerForActivityResult, and the .launch method is used in the onMealLocationClickClass ..used for the callback from the edit/add activity
     // this were two different functions in the previous iteration
     private fun registerRefreshCallback() {
@@ -63,6 +73,11 @@ class MealLocationListPresenter (val view: MealLocationListView) {
     // instantiates the registerForActivityResult and used for the .launch method for maps
     private fun registerMapCallback() {
         mapIntentLauncher = view.registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+        { }
+    }
+
+    private fun registerLogoutCallback(){
+        logoutIntentLauncher = view.registerForActivityResult(ActivityResultContracts.StartActivityForResult())
         { }
     }
 }

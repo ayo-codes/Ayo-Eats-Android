@@ -22,6 +22,7 @@ class MealLocationPresenter(private val view: MealLocationView) {
     private lateinit var imageIntentLauncher: ActivityResultLauncher<Intent> // image intent launcher
     private lateinit var mapIntentLauncher: ActivityResultLauncher<Intent> // Map intent launcher
 
+
     // var location = Location(6.4281 ,3.4219, 15f )
     var edit = false // this acts as a flag to let us know if we are or aren't in edit mode
 
@@ -34,6 +35,7 @@ class MealLocationPresenter(private val view: MealLocationView) {
         }
         registerImagePickerCallback() // call the image callback
         registerMapCallback() //call the map callback
+
     }
 
     fun doAddOrSave(
@@ -64,6 +66,8 @@ class MealLocationPresenter(private val view: MealLocationView) {
         app.mealLocations.delete(mealLocation)
         view.finish()
     }
+
+
 
     fun doSelectImage() {
         showImagePicker(imageIntentLauncher, view)
@@ -155,4 +159,6 @@ class MealLocationPresenter(private val view: MealLocationView) {
                 Timber.i("Map Loaded")
             }
     }
+
+
 }

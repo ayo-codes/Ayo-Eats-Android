@@ -54,6 +54,9 @@ class MealLocationListView : AppCompatActivity() , MealLocationListener {
             R.id.item_map -> {
                 presenter.doShowMealLocationsMap() // calls this in the presenter
             }
+            R.id.item_logout -> {
+                presenter.doLogout()
+            }
         }
         return super.onOptionsItemSelected(item)
     }
