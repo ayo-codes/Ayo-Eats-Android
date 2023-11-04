@@ -5,6 +5,8 @@ import android.os.Bundle
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
+import org.wit.ayoeats.R
 
 import org.wit.ayoeats.databinding.ActivitySignUpBinding
 import org.wit.ayoeats.main.MainApp
@@ -30,9 +32,13 @@ class SignUpActivity : AppCompatActivity() {
             user.surname = binding.editTextSurnameSignup.text.toString()
             user.email = binding.editTextTextEmailAddressSignup.text.toString()
             user.password = binding.editTextTextPasswordSignup.text.toString()
-            app.users.create(user)
-            i("Button signup clicked")
-            i("added $user to ${app.users}")
+            if (user.firstname.isNotEmpty() && user.surname.isNotEmpty() && user.email.isNotEmpty() && user.password.isNotEmpty()) {
+                app.users.create(user)
+                i("Button signup clicked")
+                i("added $user to ${app.users}")
+            } else {
+                Snackbar.make(it, R.string.fill_all_fields, Snackbar.LENGTH_LONG).show()
+            }
         }
 
         binding.textViewLoginLink.setOnClickListener {

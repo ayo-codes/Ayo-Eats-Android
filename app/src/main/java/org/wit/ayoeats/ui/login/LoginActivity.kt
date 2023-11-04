@@ -5,6 +5,8 @@ import android.os.Bundle
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
+import org.wit.ayoeats.R
 import org.wit.ayoeats.databinding.ActivityLoginBinding
 import org.wit.ayoeats.main.MainApp
 import org.wit.ayoeats.models.User
@@ -27,9 +29,13 @@ class LoginActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             user.email = binding.editTextTextEmailAddress.text.toString()
             user.password = binding.editTextTextPassword2.text.toString()
-            app.users.loginUser(user)
-            i("Button Clicked")
-            i("added $user to ${app.users}")
+            if (user.email.isNotEmpty() && user.password.isNotEmpty()){
+                app.users.loginUser(user)
+                i("Button Clicked")
+                i("added $user to ${app.users}")
+            } else {
+                Snackbar.make(it, R.string.fill_all_fields, Snackbar.LENGTH_LONG).show()
+            }
         }
 
         binding.textViewSignupLink.setOnClickListener {
