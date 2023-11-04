@@ -27,6 +27,8 @@
     <string name="hint_surname">Surname</string>
     <string name="button_signup">Signup</string>
     <string name="fill_all_fields">You need to fill all fields to proceed</string>
+    <string name="wrong_password">Wrong Password Entered</string>
+    <string name="user_not_found">Sorry No user exists for that email address</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>

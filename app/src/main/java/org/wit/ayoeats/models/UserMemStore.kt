@@ -12,17 +12,20 @@ class UserMemStore : UserStore {
 
     }
 
-    override fun loginUser(user: User) {
+    override fun loginUser(user: User): String {
             if (findByEmail(user.email, users) !== null) {
                 i("user exists")
                 val currentUser = (findByEmail(user.email, users))
                 if (user.password == currentUser?.password) {
                     i("passwords match")
+                    return "User Found"
                 } else {
                     i("wrong password")
+                    return "Wrong Password"
                 }
             }else {
                 i("user does not exist")
+                return "User Not Found"
             }
         }
 
