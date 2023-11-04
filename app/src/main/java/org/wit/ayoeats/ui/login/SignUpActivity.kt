@@ -38,6 +38,7 @@ class SignUpActivity : AppCompatActivity() {
         binding.textViewLoginLink.setOnClickListener {
             val launcherIntent = Intent(this, LoginActivity::class.java)
             toLoginIntentLauncher.launch(launcherIntent)
+            finish()
         }
         registerToLoginCallback()
     }
