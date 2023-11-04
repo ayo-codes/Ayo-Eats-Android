@@ -11,6 +11,7 @@ import org.wit.ayoeats.R
 import org.wit.ayoeats.databinding.ActivitySignUpBinding
 import org.wit.ayoeats.main.MainApp
 import org.wit.ayoeats.models.User
+import org.wit.ayoeats.views.meallocationlist.MealLocationListView
 import timber.log.Timber.i
 
 class SignUpActivity : AppCompatActivity() {
@@ -18,6 +19,7 @@ class SignUpActivity : AppCompatActivity() {
     lateinit var app: MainApp
     var user = User()
     private lateinit var toLoginIntentLauncher : ActivityResultLauncher<Intent>
+    private lateinit var toMealLocationListIntentLauncher : ActivityResultLauncher<Intent>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,14 +38,20 @@ class SignUpActivity : AppCompatActivity() {
                 app.users.create(user)
                 i("Button signup clicked")
                 i("added $user to ${app.users}")
+                val launcherIntent = Intent(this, MealLocationListView::class.java)
+                toMealLocationListIntentLauncher.launch(launcherIntent)
+                i("Moving to the Meal Location List Page")
+                finish()
             } else {
                 Snackbar.make(it, R.string.fill_all_fields, Snackbar.LENGTH_LONG).show()
             }
         }
+        registerToMealLocationListCallback()
 
         binding.textViewLoginLink.setOnClickListener {
             val launcherIntent = Intent(this, LoginActivity::class.java)
             toLoginIntentLauncher.launch(launcherIntent)
+            i("Moving to the Login Page")
             finish()
         }
         registerToLoginCallback()
@@ -52,7 +60,13 @@ class SignUpActivity : AppCompatActivity() {
     private fun registerToLoginCallback() {
         toLoginIntentLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult())
         { }
-        i("Moving to the Login Page")
+
+    }
+
+    private fun registerToMealLocationListCallback() {
+        toMealLocationListIntentLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+        { }
+
     }
 
 }
