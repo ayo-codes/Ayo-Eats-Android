@@ -6,8 +6,10 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.Marker
+import com.google.android.libraries.places.api.Places
 import org.wit.ayoeats.R
 import org.wit.ayoeats.models.Location
+import com.google.android.material.snackbar.Snackbar
 
 class EditLocationView : AppCompatActivity(), OnMapReadyCallback , GoogleMap.OnMarkerDragListener , GoogleMap.OnMarkerClickListener {
 // GoogleMap.OnMarkerDragListener used to track the movement of the marker
@@ -16,6 +18,8 @@ class EditLocationView : AppCompatActivity(), OnMapReadyCallback , GoogleMap.OnM
     lateinit var presenter: EditLocationPresenter
 //    private lateinit var binding: ActivityMapBinding
     var location = Location()
+
+//    lateinit var places: Places
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +35,9 @@ class EditLocationView : AppCompatActivity(), OnMapReadyCallback , GoogleMap.OnM
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+
+        Places.initialize(applicationContext, "AIzaSyBrccWiIYbcQh9zdLCHC4ZEXfCnjpeTY6A" )
     }
 
     /**

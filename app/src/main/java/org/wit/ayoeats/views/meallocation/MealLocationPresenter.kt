@@ -15,6 +15,7 @@ import org.wit.ayoeats.views.editlocation.EditLocationView
 import timber.log.Timber
 import timber.log.Timber.i
 
+
 class MealLocationPresenter(private val view: MealLocationView) {
     var mealLocation = MealLocationModel() // instantiate the EatLocationModel Class here
     var app: MainApp = view.application as MainApp // // MainApp class set to view
@@ -161,6 +162,7 @@ class MealLocationPresenter(private val view: MealLocationView) {
                             mealLocation.lat = location.lat
                             mealLocation.lng = location.lng
                             mealLocation.zoom = location.zoom
+                            mealLocation.address = location.address
                         }
                     }
 
