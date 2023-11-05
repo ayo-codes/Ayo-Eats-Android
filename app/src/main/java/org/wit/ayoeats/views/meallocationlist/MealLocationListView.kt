@@ -11,6 +11,7 @@ import org.wit.ayoeats.adapters.MealLocationListener
 import org.wit.ayoeats.databinding.ActivityMealLocationListBinding
 import org.wit.ayoeats.main.MainApp
 import org.wit.ayoeats.models.MealLocationModel
+import timber.log.Timber.i
 
 
 class MealLocationListView : AppCompatActivity() , MealLocationListener {
@@ -72,21 +73,22 @@ class MealLocationListView : AppCompatActivity() , MealLocationListener {
 
     // load the list of Locations
     private fun loadMealLocations() {
-
-        binding.recyclerView.adapter = MealLocationAdapter(
+        binding.recyclerView.adapter = MealLocationAdapter( presenter.currentUser,
             presenter.getMealLocations(),
-            this
-        ) // set the recycler view adapter to our custom adapter
+            this) // set the recycler view adapter to our custom adapter
         onRefresh()
     }
 
     // refresh or update the recycler view adapter
     fun onRefresh(){
-        binding.recyclerView.adapter?.notifyItemRangeChanged(0, presenter.getMealLocations().size)
+//        binding.recyclerView.adapter?.notifyDataSetChanged()
+        i("onRefresh done of Adapter")
+     binding.recyclerView.adapter?.notifyItemRangeChanged(0, presenter.getMealLocations().size)
     }
 
     fun onDelete(position: Int) {
         binding.recyclerView.adapter?.notifyItemRemoved(position)
+
     }
 
 }

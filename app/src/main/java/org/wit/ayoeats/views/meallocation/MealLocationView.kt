@@ -72,7 +72,7 @@ class MealLocationView : AppCompatActivity() {
                 Snackbar.make(it, R.string.enter_mealLocation_mealName, Snackbar.LENGTH_LONG)
                     .show() // This shows the warning if the field is empty
             } else {
-                presenter.doAddOrSave(binding.mealName.text.toString(), binding.mealDescription.text.toString(), binding.mealPrice.text.toString().toDouble() , binding.RatingsProgress.text.toString().toDouble())
+                presenter.doAddOrSave(binding.mealName.text.toString(), binding.mealDescription.text.toString(), binding.mealPrice.text.toString().toDouble() , binding.RatingsProgress.text.toString().toDouble() , presenter.currentUser.id )
             }
 
 

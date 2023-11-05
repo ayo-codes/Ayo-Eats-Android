@@ -10,12 +10,15 @@ import org.wit.ayoeats.helpers.showImagePicker
 import org.wit.ayoeats.main.MainApp
 import org.wit.ayoeats.models.Location
 import org.wit.ayoeats.models.MealLocationModel
+import org.wit.ayoeats.models.User
 import org.wit.ayoeats.views.editlocation.EditLocationView
 import timber.log.Timber
+import timber.log.Timber.i
 
 class MealLocationPresenter(private val view: MealLocationView) {
     var mealLocation = MealLocationModel() // instantiate the EatLocationModel Class here
     var app: MainApp = view.application as MainApp // // MainApp class set to view
+    var currentUser = User() // instantiates a current user
 
     var binding: ActivityMealLocationBinding =
         ActivityMealLocationBinding.inflate(view.layoutInflater) // sets the variable binding to a type of ActivityEatLocationBinding
@@ -33,6 +36,11 @@ class MealLocationPresenter(private val view: MealLocationView) {
             mealLocation = view.intent.extras?.getParcelable("mealLocation_edit")!!
             view.showMealLocation(mealLocation)
         }
+        if(view.intent.hasExtra("current_user")){
+            currentUser = view.intent.extras?.getParcelable("current_user")!!
+            i("Received Current User : ${currentUser} from the Meal Location List")
+
+        }
         registerImagePickerCallback() // call the image callback
         registerMapCallback() //call the map callback
 
@@ -42,12 +50,14 @@ class MealLocationPresenter(private val view: MealLocationView) {
         mealName: String,
         mealDescription: String,
         mealPrice: Double,
-        mealRating: Double
+        mealRating: Double,
+        userId: Long
     ) {
         mealLocation.mealName = mealName
         mealLocation.mealDescription = mealDescription
         mealLocation.mealPrice = mealPrice
         mealLocation.mealRating = mealRating
+        mealLocation.userId = userId
         if (edit) {
             app.mealLocations.update(mealLocation)
         } else {

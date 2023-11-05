@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import org.wit.ayoeats.databinding.CardMealLocationBinding
 import org.wit.ayoeats.models.MealLocationModel
+import org.wit.ayoeats.models.User
 
 
 // interface for the listener to help with when the card is clicked,
@@ -14,7 +15,8 @@ interface MealLocationListener {
 }
 
 // added a listener as a parameter of the adapter, which is utilised by the onBindViewHolder
-class MealLocationAdapter constructor( private var mealLocations: List<MealLocationModel> , private val listener: MealLocationListener): RecyclerView.Adapter<MealLocationAdapter.MainHolder>() {
+// passed a user class , so I could tell the adapter who the current user is
+class MealLocationAdapter constructor(private var user: User, private var mealLocations: List<MealLocationModel>, private val listener: MealLocationListener ): RecyclerView.Adapter<MealLocationAdapter.MainHolder>()  {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -32,7 +34,7 @@ class MealLocationAdapter constructor( private var mealLocations: List<MealLocat
     }
 
     override fun getItemCount(): Int {
-        return mealLocations.size
+        return mealLocations.filter { it.userId == user.id }.size
     }
 
     class MainHolder(private val binding: CardMealLocationBinding) : RecyclerView.ViewHolder(binding.root){
