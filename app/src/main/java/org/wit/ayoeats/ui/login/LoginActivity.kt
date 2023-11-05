@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.google.android.material.snackbar.Snackbar
 import org.wit.ayoeats.R
 import org.wit.ayoeats.databinding.ActivityLoginBinding
@@ -15,6 +16,7 @@ import timber.log.Timber.i
 
 class LoginActivity : AppCompatActivity() {
 
+
     private lateinit var binding: ActivityLoginBinding
     lateinit var app: MainApp
     var user = User()
@@ -23,6 +25,8 @@ class LoginActivity : AppCompatActivity() {
     var currentUser = User()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        installSplashScreen() // used for splashScreen
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)

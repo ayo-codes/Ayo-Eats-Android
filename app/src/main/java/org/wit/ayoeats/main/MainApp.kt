@@ -26,11 +26,15 @@ class MainApp : Application() {
 
 
 
+
+
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree()) // initialise the logging library
         i("MainApp Activity started")
-//        mealLocations = MealLocationMemStore() // instantiates the MealLocationMemStore Class and saves it in the variable mealLocations
+
+
+        //        mealLocations = MealLocationMemStore() // instantiates the MealLocationMemStore Class and saves it in the variable mealLocations
         mealLocations = MealLocationJSONStore(applicationContext) // instantiates the JSONStore passing the application context as the context
         mealLocations.create(MealLocationModel(0L, "TestJohn", "TestJohn" , 24.99 , 4.0 ,1L ))
         mealLocations.create(MealLocationModel(1L, "TestMary", "TestMary" , 24.99 , 4.0 ,2L ))
@@ -40,6 +44,8 @@ class MainApp : Application() {
         users.create(User("mary","jane","test2@test.com" , "test" ))
 
     }
+
+
 
 
 //    fun updateCurrentUser(user:User): User{
