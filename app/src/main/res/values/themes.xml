@@ -8,6 +8,12 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="windowSplashScreenBackground">@color/colorAccent</item>
+
+        <item name="windowSplashScreenAnimatedIcon">@drawable/baseline_local_dining_24</item>
+
+        <item name="postSplashScreenTheme">@style/Theme.AyoEats</item>
+    
     </style>
 
     <style name="Theme.AyoEats" parent="Base.Theme.AyoEats" />
