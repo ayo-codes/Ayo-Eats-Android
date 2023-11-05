@@ -37,7 +37,7 @@ class EditLocationView : AppCompatActivity(), OnMapReadyCallback , GoogleMap.OnM
         mapFragment.getMapAsync(this)
 
 
-        Places.initialize(applicationContext, "AIzaSyBrccWiIYbcQh9zdLCHC4ZEXfCnjpeTY6A" )
+        Places.initialize(applicationContext, API_KEY_HERE )
     }
 
     /**
