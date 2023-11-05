@@ -49,7 +49,7 @@ class MealLocationView : AppCompatActivity() {
                 progress: Int,
                 fromUser: Boolean
             ) {
-                binding.RatingsProgress.text = binding.seekBarRatings.progress.toString()
+                binding.RatingsProgress.text = binding.seekBarRatings.progress.toString() + " Stars"
 
             }
 
@@ -142,6 +142,7 @@ class MealLocationView : AppCompatActivity() {
         binding.mealPrice.setText(mealLocation.mealPrice.toString())
         binding.seekBarRatings.progress = mealLocation.mealRating.toInt()
         binding.RatingsProgress.text = mealLocation.mealRating.toString()
+        binding.mealAddress.text = mealLocation.address
         binding.btnAdd.setText(R.string.save_meal_location) // change the button text
         Picasso.get()
             .load(mealLocation.image)

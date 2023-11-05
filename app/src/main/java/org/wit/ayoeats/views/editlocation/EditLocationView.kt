@@ -36,7 +36,7 @@ class EditLocationView : AppCompatActivity(), OnMapReadyCallback , GoogleMap.OnM
         mapFragment.getMapAsync(this)
 
 
-        Places.initialize(applicationContext, "API_KEY_HERE" )
+        Places.initialize(applicationContext, "API_KEY_GOES_HERE" )
     }
 
     /**

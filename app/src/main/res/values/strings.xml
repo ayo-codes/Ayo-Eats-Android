@@ -4,9 +4,9 @@
     <string name="hint_mealName">Meal Name</string>
     <string name="hint_mealDescription">Meal Description</string>
     <string name="hint_mealPrice">Meal Price</string>
-    <string name="hint_mealRating">Meal Rating</string>
+    <string name="hint_mealRating">Rate the Meal out of 5</string>
     <string name="textview_rate_label">Current Rating</string>
-    <string name="textview_rating_progress">0</string>
+    <string name="textview_rating_progress">0 Stars</string>
     <string name="menu_addMealLocation">Add</string>
     <string name="menu_cancelMealLocation">Cancel</string>
     <string name="enter_mealLocation_mealName">Please Enter a Meal Name</string>
@@ -33,6 +33,7 @@
     <string name="Welcome_Signup">Welcome to AyoEats! \n Please fill in the details below to create an account </string>
     <string name="Welcome_Login">Welcome to AyoEats! \n Please enter your email and password to access your account </string>
     <string name="Welcome_Firstname">Welcome User</string>
+    <string name="Meal_Location_Address_Label"> Meal Location Address: </string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
