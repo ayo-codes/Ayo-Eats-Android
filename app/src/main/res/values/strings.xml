@@ -18,6 +18,18 @@
     <string name="title_activity_map">MapActivity</string>
     <string name="menu_deleteMealLocation">Delete</string>
     <string name="title_activity_meal_location_maps">Map of All Meal Locations</string>
+    <string name="hint_email">Enter your email </string>
+    <string name="hint_password">Enter your password</string>
+    <string name="button_login">Login</string>
+    <string name="link_to_signUp">Don\'t have an account yet? Signup here</string>
+    <string name="link_to_Login">Already have an account yet? Login here</string>
+    <string name="hint_firstname">Firstname</string>
+    <string name="hint_surname">Surname</string>
+    <string name="button_signup">Signup</string>
+    <string name="fill_all_fields">You need to fill all fields to proceed</string>
+    <string name="wrong_password">Wrong Password Entered</string>
+    <string name="user_not_found">Sorry No user exists for that email address</string>
+    <string name="Logout">Logout</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>

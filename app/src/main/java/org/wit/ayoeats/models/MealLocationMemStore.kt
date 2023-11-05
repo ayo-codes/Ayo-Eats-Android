@@ -1,5 +1,6 @@
 package org.wit.ayoeats.models
 
+import androidx.appcompat.app.AppCompatActivity
 import timber.log.Timber.i
 
 
@@ -11,11 +12,17 @@ internal fun getId(): Long {
 
 // this class here implements the MealLocationStore interface class, so every function in that class needs to be represented and worked on here
 // to determine how they will work
-class MealLocationMemStore : MealLocationStore {
+class MealLocationMemStore() : AppCompatActivity(), MealLocationStore {
+
+
 
     val mealLocations = ArrayList<MealLocationModel>() // mealLocations is an arraylist of the data class
+
+
     override fun findAll(): List<MealLocationModel> {
-        return mealLocations
+
+
+       return mealLocations
     }
 
     override fun create(mealLocation: MealLocationModel) {
@@ -52,4 +59,12 @@ class MealLocationMemStore : MealLocationStore {
     fun logAll() {
         mealLocations.forEach { i ("$it") }
     }
+
+//    fun findCurrentUsersMealLocations(user: User) : List<MealLocationModel> {
+//        val currentUserMealLocations = mealLocations.filter { it.userId == user.id
+//        }
+//        i("${user} current user")
+//        i("$currentUserMealLocations arraylist")
+//        return currentUserMealLocations
+//    }
 }
