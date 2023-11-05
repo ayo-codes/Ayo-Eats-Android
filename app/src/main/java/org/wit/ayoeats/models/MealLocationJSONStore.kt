@@ -63,6 +63,7 @@ class MealLocationJSONStore(private val context: Context) : MealLocationStore { 
             foundMeaLocation.lat = mealLocation.lat
             foundMeaLocation.lng = mealLocation.lng
             foundMeaLocation.zoom = mealLocation.zoom
+            foundMeaLocation.address = mealLocation.address
         }
         serialize()
 

@@ -16,11 +16,12 @@ data class MealLocationModel(
     var image: Uri = Uri.EMPTY,
     var lat: Double = 0.0,
     var lng: Double = 0.0,
-    var zoom: Float = 0f
+    var zoom: Float = 0f,
+    var address: String = ""
 ) : Parcelable // title property and a value is given here
 
 @Parcelize
-data class Location(var lat: Double = 0.0, var lng: Double = 0.0, var zoom: Float = 0f) : Parcelable
+data class Location(var lat: Double = 0.0, var lng: Double = 0.0, var zoom: Float = 0f, var address: String = "") : Parcelable
 
 @Parcelize
 data class User( var firstname: String = "", var surname:String="" , var email: String ="", var password: String ="", var id: Long =0L):Parcelable
