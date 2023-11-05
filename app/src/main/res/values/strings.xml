@@ -30,11 +30,14 @@
     <string name="wrong_password">Wrong Password Entered</string>
     <string name="user_not_found">Sorry No user exists for that email address</string>
     <string name="Logout">Logout</string>
+    <string name="Welcome_Signup">Welcome to AyoEats! \n Please fill in the details below to create an account </string>
+    <string name="Welcome_Login">Welcome to AyoEats! \n Please enter your email and password to access your account </string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+
 
 
 </resources>
