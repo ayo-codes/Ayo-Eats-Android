@@ -33,6 +33,11 @@ class MealLocationListPresenter (val view: MealLocationListView) {
             userLoggedIn = true
             currentUser = view.intent.extras?.getParcelable("current_user1")!!
         }
+
+        if(view.intent.hasExtra("current_user2")){
+            userLoggedIn = true
+            currentUser = view.intent.extras?.getParcelable("current_user2")!!
+        }
     }
 
     // retrieve all meal locations
@@ -54,6 +59,7 @@ class MealLocationListPresenter (val view: MealLocationListView) {
     // function for when the show map menu button pressed
     fun doShowMealLocationsMap() {
         val launcherIntent = Intent(view , MealLocationMapsView::class.java)
+        launcherIntent.putExtra("current_user3" , currentUser)
         mapIntentLauncher.launch(launcherIntent)
     }
 

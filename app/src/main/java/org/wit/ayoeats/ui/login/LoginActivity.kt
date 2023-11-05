@@ -68,6 +68,7 @@ class LoginActivity : AppCompatActivity() {
                     val launcherIntent = Intent(this, MealLocationListView::class.java)
                     launcherIntent.putExtra("current_user1" , currentUser)
                     toMealLocationListIntentLauncher.launch(launcherIntent)
+                    finish()
 
                 }
             } else {

@@ -88,7 +88,8 @@ class MealLocationView : AppCompatActivity() {
                 binding.mealName.text.toString(),
                 binding.mealDescription.text.toString(),
                 binding.mealPrice.text.toString().toDouble(),
-                binding.RatingsProgress.text.toString().toDouble()
+                binding.RatingsProgress.text.toString().toDouble(),
+                presenter.currentUser.id
             ) // we now pass a context when using the showImagePicker
             i("Select Image Clicked")
             presenter.doSelectImage()
@@ -101,7 +102,8 @@ class MealLocationView : AppCompatActivity() {
                 binding.mealName.text.toString(),
                 binding.mealDescription.text.toString(),
                 binding.mealPrice.text.toString().toDouble(),
-                binding.RatingsProgress.text.toString().toDouble()
+                binding.RatingsProgress.text.toString().toDouble(),
+                presenter.currentUser.id
             )
             i("Select Pick Location Clicked")
             presenter.doSetLocation()

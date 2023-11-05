@@ -18,6 +18,7 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignUpBinding
     lateinit var app: MainApp
     var user = User()
+    var currentUser = User()
     private lateinit var toLoginIntentLauncher : ActivityResultLauncher<Intent>
     private lateinit var toMealLocationListIntentLauncher : ActivityResultLauncher<Intent>
 
@@ -36,9 +37,12 @@ class SignUpActivity : AppCompatActivity() {
             user.password = binding.editTextTextPasswordSignup.text.toString()
             if (user.firstname.isNotEmpty() && user.surname.isNotEmpty() && user.email.isNotEmpty() && user.password.isNotEmpty()) {
                 app.users.create(user)
+                currentUser = app.users.loggedInUser(user)!!
                 i("Button signup clicked")
                 i("added $user to ${app.users}")
+
                 val launcherIntent = Intent(this, MealLocationListView::class.java)
+                launcherIntent.putExtra("current_user2" , currentUser)
                 toMealLocationListIntentLauncher.launch(launcherIntent)
                 i("Moving to the Meal Location List Page")
                 finish()

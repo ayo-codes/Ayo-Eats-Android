@@ -103,12 +103,14 @@ class MealLocationPresenter(private val view: MealLocationView) {
         mealName: String,
         mealDescription: String,
         mealPrice: Double,
-        mealRating: Double
+        mealRating: Double,
+        userId: Long
     ) {
         mealLocation.mealName = mealName
         mealLocation.mealDescription = mealDescription
         mealLocation.mealPrice = mealPrice
         mealLocation.mealRating = mealRating
+        mealLocation.userId = currentUser.id
     }
 
     //Image CallBack function
