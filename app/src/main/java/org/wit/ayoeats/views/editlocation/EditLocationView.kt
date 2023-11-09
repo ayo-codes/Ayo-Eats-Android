@@ -9,7 +9,6 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.libraries.places.api.Places
 import org.wit.ayoeats.R
 import org.wit.ayoeats.models.Location
-import com.google.android.material.snackbar.Snackbar
 
 class EditLocationView : AppCompatActivity(), OnMapReadyCallback , GoogleMap.OnMarkerDragListener , GoogleMap.OnMarkerClickListener {
 // GoogleMap.OnMarkerDragListener used to track the movement of the marker
@@ -37,7 +36,7 @@ class EditLocationView : AppCompatActivity(), OnMapReadyCallback , GoogleMap.OnM
         mapFragment.getMapAsync(this)
 
 
-        Places.initialize(applicationContext, API_KEY_HERE )
+        Places.initialize(applicationContext, "API_KEY_GOES_HERE" )
     }
 
     /**

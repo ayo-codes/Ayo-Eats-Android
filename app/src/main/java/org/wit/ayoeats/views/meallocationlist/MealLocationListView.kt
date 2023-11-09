@@ -34,6 +34,9 @@ class MealLocationListView : AppCompatActivity() , MealLocationListener {
         //app
         app = application as MainApp // late initialising of MainApp class
 
+        //set user's name
+        binding.welcomeUser.setText("Welcome " + presenter.currentUser.firstname)
+
         // Recycler View Work
         val layoutManager = LinearLayoutManager(this) // create a LinearLayout and assign it to variable passing this class
         binding.recyclerView.layoutManager = layoutManager // set the recyclerView layoutManager to the one we created above
